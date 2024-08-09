@@ -5,11 +5,12 @@ const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 router.route("/products").get( getAllProducts );
 
-router.route("/products/new").post( isAuthenticatedUser, authorizeRoles("admin"), createProduct);
+router.route("/admin/products/new").post( isAuthenticatedUser, authorizeRoles("admin"), createProduct);
 
-router.route("/products/:id")
+router.route("/admin/products/:id")
 .put(isAuthenticatedUser,  authorizeRoles("admin"), updateProduct)
 .delete(isAuthenticatedUser,  authorizeRoles("admin"), deleteProduct)
-.get( getSingleProduct);
+
+router.route("/products/:id").get( getSingleProduct);
 
 module.exports = router;

@@ -149,13 +149,117 @@ exports.getUserDetails = catchAsyncErrors( async( req, res, next)=>{
     })
 })
 
+// update User password
+exports.updatePassword = catchAsyncErrors( async( req, res, next)=>{
 
+    const user = await User.findById( req.user.id).select("+password");
+    
+    const isPasswordMatched = await user.comparePassword( req.body.oldPassword);
 
+    if(!isPasswordMatched){
+        return next( new ErrorHandler( 401, "old password is incorrect"));
+    }
 
+    if(req.body.newPassword != req.body.conformPassword){
+        return next( new ErrorHandler( 400, "password does not match"));
+    }
 
+    user.password = req.body.newPassword;
+    await user.save();
 
+    sendToken( user, 200, res);
 
+})
 
+// update User Profile
+exports.updateProfile = catchAsyncErrors( async ( req, res, next)=>{
 
+    const newUserData = {
+        name: req.body.name ,
+        email: req.body.password
+    };
+
+    // this area is for cloudinary and used for user avatar
+    
+    const user = await User.findByIdAndUpdate( req.user.id , newUserData, {
+        new: true,
+        runValidators:true,
+        useFindAndModify: false,
+    });
+
+    res.status(200).json({
+        success: true,
+    })
+})
+
+// Get all users --(admin)
+exports.getAllUsers = catchAsyncErrors( async( req, res, next)=>{
+
+    const users = await User.find();
+
+    res.status(200).json({
+        success: true,
+        users,
+    })
+})
+
+// Get single user --(admin)
+exports.getSingleUser = catchAsyncErrors( async( req, res, next)=>{
+
+    const user = await User.findById( req.params.id);
+
+    if(!user){
+        return next( new ErrorHandler( 404, `User does not exist with Id: ${ req.params.id}`))
+    }
+
+    res.status(200).json({
+        success: true,
+        user,
+    })
+})
+
+// update User Role --(admin)
+exports.udpateUserRole = catchAsyncErrors( async( req, res, next)=>{
+
+                                                                 // if any field is undefined , then this method not included the update object, and therefore not updated.( because it uses $set operator under the hood). 
+    const userNewData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role,
+    }
+
+    console.log(userNewData);
+
+    const user = await User.findByIdAndUpdate( req.params.id, userNewData, {
+        new: true,
+        runValidators:true,
+        useFindAndModify: false,
+    })
+
+    res.status(200).json({
+        success: true,
+        message: "user updated successfully",
+    })
+})
+
+// Delete User --(admin)
+exports.deleteUser = catchAsyncErrors( async( req, res, next)=>{
+
+    const isUser = User.findById( req.params.id);
+
+    if(!isUser){
+        return next( new ErrorHandler( 404, `User does not exist with Id: ${req.params.is}`));
+    }
+
+    // i will remove cloudinary later
+
+    const user = await User.findOneAndDelete( req.params.id);
+
+    res.status(200).json({
+        success: true,
+        message: "user deleted successfully",
+    })
+
+})
 
 
