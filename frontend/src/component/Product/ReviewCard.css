@@ -1,0 +1,53 @@
+.reviewCard{
+    border:2px solid rgba(128, 128, 128, 0.596);
+    width:35vmax;
+    height:25vmax;
+    min-width:35vmax;
+    min-height:25vmax;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(170, 135, 135, 0.541);
+    padding: 2.4vmax;
+    margin: 1vmax;
+    box-sizing: border-box;
+    overflow:hidden;
+}
+.reviewCard:hover{
+    overflow: auto;
+
+} 
+
+.reviewCard::-webkit-scrollbar{
+    width: 10px;
+    background-color: rgba(216, 211, 211, 0.973);
+    border-radius:5px;
+}
+
+.reviewCard::-webkit-scrollbar-thumb{
+    background-color: rgba(128, 128, 128, 0.411);
+    border-radius: 5px;
+}
+
+
+
+
+
+
+.reviewCard > img{
+    width: 5vmax;
+}
+
+.reviewCard > h3{
+    font: 600 2vmax "Roboto";
+    color: rgb(43, 42, 42);
+
+}
+
+.reviewCard > p{
+    font : 400 1vmax "Roboto";
+    letter-spacing: 1px;
+    color: hsl(0, 2%, 32%);
+}
+

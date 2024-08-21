@@ -1,0 +1,114 @@
+
+.LoginSignUpContainer{
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    margin-top: 4vmax;
+    justify-content: center;
+}
+
+.LoginSignUpBox{
+    width: 28vmax;
+    height: 80vh;
+    border-radius: 3px;
+    box-sizing: border-box;
+    overflow:hidden;
+    background-color: white;
+    box-shadow: 1px 1px 11px gray;
+}
+
+.login_signup_toggle{
+    display:flex;
+    height:3vmax;
+    font: 400 1.4vmax "Roboto";
+    color:black;
+}
+
+.login_signup_toggle > p{
+    width:50%;
+    padding: 0.5vmax 0px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.login_signup_toggle > p:hover{
+    color: tomato;  
+}
+
+.LoginSignUpBox > button{
+    width:50%;
+    height:3px;
+    background-color: orangered;
+    border:none;
+    position:relative;
+    top:-12px;
+    border-radius: 3px;
+    left:50%;
+    transition: all 1s;
+}
+
+.loginForm , .SignUpForm {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.loginForm > div > input{
+    border:2px solid rgba(128, 128, 128, 0.76);
+    padding:1vmax 4.3vmax;
+    box-sizing: border-box;
+    margin-top: 3vmax;
+    border-radius:5px;
+    outline-color: tomato;
+    font:400 1.2vmax "Roboto";
+}
+
+.loginForm > div >svg{
+    position:absolute;
+    font-size: 1.7vmax;
+    transform:translate(20px,57px);
+    
+}
+
+.loginPassword > .eye > svg {
+    
+    
+    font-size: 2vmax;
+    color:rgba(53, 51, 51, 0.863);
+    position:relative;
+    top:-40px;
+    left:270px;
+
+}
+
+.loginForm > a {
+    color:rgba(0, 0, 0, 0.603);
+    margin: 0.3vmax 2.4vmax 0 0;
+    align-self: flex-end;
+    text-decoration: none;
+    font:600 1vmax 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.loginForm > a:hover{
+    color:black;
+}
+
+.loginBtn,
+.signUpBtn{
+    border:none;
+    background-color: orangered;
+    margin-top: 2.5vmax;
+    color:white;
+    border-radius: 5px;;
+    padding: 0.8vmax 10.5vmax;
+    font: 400 1vmax "Roboto";
+    text-align:center;
+    box-shadow: 1px 1px 7px gray;
+}
+
+.loginBtn:hover,
+.signUpBtn:hover{
+    background-color: rgba(255, 68, 0, 0.795);
+}

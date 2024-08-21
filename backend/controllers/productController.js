@@ -18,49 +18,61 @@ exports.createProduct = catchAsyncErrors( async ( req,res,next)=>{
 
 // Get All Product 
 exports.getAllProducts = catchAsyncErrors( async ( req, res, next)=>{
+  
+    // return next( new ErrorHandler(500, "this is created by user"));
+    console.log(req.query);
 
-    console.log("user comes from middleware ",req.user);
-
-
-    //count 
+    // count documents
     const productCount = await Product.countDocuments();
-    console.log("---count--- ",productCount);
-
-    
-    // Example:- { keyword: "hai", page:2, limit:10, category:"technology",price:{gt:2000,lt:6000}}
-
+   
     // api features
-    const apifeatures = new ApiFeature( Product , req.query);
+    const apifeatures = new ApiFeature( Product ,req.query).search().filter();
 
-    // search feature
-    const search = await apifeatures.search();
-    console.log("---search--- ",search);  
+    //------------------//just for filters count---------------------------------
+    // count after filteration of products
+    const filterfeatures = new ApiFeature( Product ,req.query).search().filter();
+    let products = await filterfeatures.query;
+     filteredProductsCount = products.length;
+    //---------------------------------------------------
 
-    // filter feature
-    const filter = await apifeatures.filter();
-    console.log("---filter--- ",filter);
-
-    // pagination feature
-    const resultPerPage=3;
-    const pagination = await apifeatures.pagination( resultPerPage);
-    console.log("---pagination--- ",pagination);
-
+    // search feature , filter feature and pagination feature
+    const resultPerPage=8;
+    apifeatures.pagination(resultPerPage);
+   
     // find all products
-    const products = await Product.find();
+    products = await apifeatures.query;
+
+
     res.status(200).json({
         success:true,
         products,
-        productCount
+        productCount,
+        resultPerPage,
+        filteredProductsCount,
     });
+
+
+       
+    //-------------------------------------------------------------------------------------------------
+    // req.query = { keyword: "e", page:2, limit:10, category:"technology",price:{gt:5000,lt:50000}};
+    // 1. await Product.find(req.query);
+    // 2. await Product.find({name:"gagam",age:21});
+    // 3. await Product.find().where("name").equals("gagan").where(age).equals(21);
+
+    //ShortCut for filtering in just one line(logic is just do)
+    // const await Product.find(req.query.keyword).find(fiterResult).skip(skip).limit(resultPerPage);
+    //-------------------------------------------------------------------------------------------------
+   
+
 })
 
 // Get Single Product
 
 exports.getSingleProduct = catchAsyncErrors( async ( req, res, next)=>{
+    
     const product = await Product.findById(req.params.id);
 
     if(!product){
-
         return next( new ErrorHandler( 500, "Product Not Found"))
     }
     else{

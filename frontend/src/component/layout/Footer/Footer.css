@@ -24,6 +24,13 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.leftFooter h5{
+    margin-bottom: 2vmin;
+}
+.leftFooter h3{
+    margin-bottom: 2vmin;
+}
+
 .rightFooter{
     width: 20%;
     display: flex;

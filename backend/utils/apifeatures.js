@@ -1,41 +1,42 @@
 class ApiFeature{
-    constructor( productSchema , query){
-        this.productSchema = productSchema;
+    constructor( query , queryString){
         this.query = query;
+        this.queryString = queryString;
     }
 
-    async search(){
-        const keyword = this.query.keyword ? { name: { $regex: this.query.keyword, $options: "i" } } : {} ;
-        const query = await this.productSchema.find({...keyword} );       //to use copy not take reference, otherwise the change occurs in original
+    search(){
+        const keyword = this.queryString.keyword ? 
+        { name: { $regex: this.queryString.keyword, $options: "i" } } : {} ;
        
-        return query;
+        this.query = this.query.find({...keyword} );       //to use copy not take reference, otherwise the change occurs in original
+        return this;
     }
 
-    async filter(){
-        const queryCopy = {...this.query};   
+    filter(){
+        const queryCopy = {...this.queryString};    
 
         // Removing some fields for price
-        const removefields = ["keyword", "page", "limit", "category"];
+        const removefields = ["keyword", "page", "limit"];
         removefields.forEach( (key)=> delete queryCopy[key]);
 
         // Filter for Price and Rating
         let queryStr = JSON.stringify(queryCopy);
         queryStr = queryStr.replace( /\b(gt|lt|gte|lte)\b/g, (key)=> `$${key}`);
         queryStr = JSON.parse(queryStr);
-
+        console.log(queryStr);
         
-        let filter = await this.productSchema.find(queryStr);
+        this.query = this.query.find(queryStr);
     
-        return filter;
+        return this;
         
         
     }
 
-    async pagination(resultPerPage){
-        const currPage = Number(this.query.page) || 1;
+    pagination(resultPerPage){
+        const currPage = Number(this.queryString.page) || 1;
         const skip = resultPerPage*( currPage-1);
-        let page = await this.productSchema.find().skip( skip).limit( resultPerPage);
-        return page;
+        this.query = this.query.find().skip(skip).limit(resultPerPage);
+        return this;
     }
 
    

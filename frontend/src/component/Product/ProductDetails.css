@@ -1,0 +1,228 @@
+/*products----------------------*/
+
+.ProductDetails{
+    background-color: rgb(236, 229, 229);
+    display:flex;
+    border: 2px solid #ffffff83;
+    width: 100vw;
+    max-width:100%;
+    box-sizing: border-box;
+    margin-top:6vmax;
+}
+
+.block-1{
+    width: 50%;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+
+}
+
+/*use browser to find class*/
+.css-1f8sh1y{
+    width:20vw !important;
+}
+
+.CarouselImage{
+    width: 20vw;
+    height: 60vh;
+    object-fit: cover;
+} 
+
+.block-2{
+    border-left: 2px solid white;
+    width:50%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 30px;
+    box-sizing: border-box;
+}
+
+.detailsBlock-1{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.664);
+}
+.detailsBlock-1 > h2{
+    font : 700 2vmax "Roboto";
+    color: rgb(41, 39, 39);
+
+}
+.detailsBlock-1 > p{
+    font : 400 0.8vmax "Roboto";
+    color:rgb(82, 81, 79);
+    margin-bottom: 0.4vmax;
+}
+
+
+.detailsBlock-2{
+    display:flex;
+    align-items: center;
+    padding: 1vmax 0px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.664);
+}
+.detailsBlock-2 span{
+    font : 400 0.8vmax "Roboto";
+    color:rgb(82, 81, 79);
+}
+
+
+
+.detailsBlock-3{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.664);
+}
+.detailsBlock-3 h1{
+    font : 700 2vmax "Roboto";
+    color: rgba(22, 21, 21, 0.767);
+    margin: 1vmax 0px;
+    letter-spacing: 1px;
+}
+
+.details-3-1{
+    display: flex;
+}
+
+.details-3-1-1{
+    margin: 1vmax 0px;  
+
+}
+.details-3-1-1 button{
+    border:none;
+    border-radius: 1px;
+    padding:7px 7px;
+    color:white;
+    background-color: rgba(0, 0, 0, 0.747);
+    box-shadow: 2px 2px 10px gray;
+}
+.details-3-1-1 > button:hover{
+    background-color: rgba(0, 0, 0, 0.514);
+}
+
+.details-3-1-1 input{
+    width:30px;
+    padding: 4px 0px 4px 0px;
+    outline: none;
+    text-align:center;
+    font: 400 15px "Roboto";
+    border:none;
+    box-shadow: 2px 2px 10px gray;
+}
+
+
+.details-3-1-2 > button{
+    padding: 0.5vmax 3.4vmax;
+    border-radius: 1vmax; 
+    color:white;
+    background-color: tomato;
+    border: none;
+    box-shadow: 2px 2px 5px gray;
+    margin: 1vmax;
+    font: 300 1vmax "Roboto";
+}
+.details-3-1-2 > button:hover{
+    background-color: rgba(255, 99, 71, 0.644);
+}
+
+.detailsBlock-4{
+    font : 300 1.3vmax "Roboto";
+    color: hsl(0, 2%, 32%);
+    padding: 1vmax 0vmax;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.664);
+}
+
+.detailsBlock-4 .InS{
+    font : 600 1.3vmax "Roboto";
+    color: green;
+    padding: 1vmax 0vmax;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.664);
+}
+
+.detailsBlock-4 .OoS{
+    font : 600 1.3vmax "Roboto";
+    color: rgb(209, 4, 4);
+    padding: 1vmax 0vmax;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.664);
+}
+
+.detailsBlock-5{
+    margin:1vmax 0vmax 1vmax 0vmax;
+}
+.detailsBlock-5 > h2{
+    font : 400 2vmax "Roboto";
+    color: rgba(41, 39, 39, 0.849);
+}
+.detailsBlock-5 > p{
+    font : 400 1.2vmax "Roboto";
+    color: rgba(41, 39, 39, 0.753);
+    letter-spacing: 1px;
+}
+
+.submitreview{
+    padding: 0.5vmax 1vmax;
+    border-radius: 1vmax; 
+    width:13vmax;
+    color:white;
+    background-color: tomato;
+    border: none;
+    box-shadow: 2px 2px 5px gray;
+    font: 300 1vmax "Roboto";
+}
+.submitreview:hover{
+    background-color: rgba(255, 99, 71, 0.644);
+}
+
+
+/*reviews----------------------*/
+
+.reviewsHeading{
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2vmax;
+    font-weight: 400;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.664);
+    width:30vmax;
+    margin: 0.8vmax auto;
+    color: rgba(0, 0, 0, 0.849);
+    padding: 0px 0px 4px 0px;
+}
+
+.reviews{
+    background-color: rgba(236, 229, 229, 0.37);
+    display:flex;
+    overflow:hidden;
+    width:98vmax;
+    box-sizing: border-box;
+    margin: 2vmax 2vmax 0px 0px;
+} 
+
+.reviews:hover{
+    overflow: auto;
+}
+
+.reviews::-webkit-scrollbar{
+    height: 10px;
+    background-color: rgba(216, 211, 211, 0.973);
+    border-radius:5px;
+}
+
+.reviews::-webkit-scrollbar-thumb{
+    background-color: rgba(180, 174, 174, 0.76);
+    border-radius: 5px;
+}
+
+.noReviews{
+    margin-top:40px;
+    text-align:center;
+    font: 400 2vmax "Roboto";
+    color: rgba(43, 42, 42, 0.699);
+
+}
+
+
+
+
+
