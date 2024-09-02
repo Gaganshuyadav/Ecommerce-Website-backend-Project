@@ -37,6 +37,10 @@ const userSchema = mongoose.Schema({
         type: String,
         default:"user",
     },
+    createdAt: {
+        type: String,
+        default: Date,
+    },
     resetPasswordToken:{
         type: String
     },
@@ -46,7 +50,7 @@ const userSchema = mongoose.Schema({
 })
 
 // convert password into hash password
-userSchema.pre("save", async function( next){               //arrow function not work for ,this keyword which refers to the calling object
+userSchema.pre("save", async function( next){               //arrow function not work for ,this keyword which refers to the calling object (generally global object is window object or say document object(means currently loaded in the browser))
     if(!this.isModified("password")){
         next();
     }
@@ -75,7 +79,7 @@ userSchema.methods.getResetPasswordToken = function( ) {
     // Hashing and adding resetPasswordToken to userSchema
     this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
 
-    this.resetPasswordExpire = new Date( Date.now() + 15 * 60 * 60 * 1000 );
+    this.resetPasswordExpire = new Date( Date.now() + 15 * 60 * 1000 );
 
     return resetToken;
 

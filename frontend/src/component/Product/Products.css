@@ -1,0 +1,189 @@
+.right-side{
+    width:80vw;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-end;
+    margin-left: 18vmax;
+}
+
+/* products-container----------------------------------*/
+
+.products{
+    width: 80vmax;
+    display:flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    justify-content: center;
+}
+
+
+.productsHeading{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.603);
+    box-shadow: 0px 11px 18px 2px gray;
+    margin: 5vmin auto;
+    width:20vmax;
+    text-align: center;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
+    color: black;
+}
+
+
+/*filter box--------------------------------------*/
+
+/*--------slider-range------*/
+.filterBox{
+    
+    position:fixed;
+    top:8vmax;
+    /* background-color: white; */
+    z-index:10;
+    width:18vmax;
+    height:70vh;
+    left:2vmax;
+    font-size: 12px;
+    padding:10px 0px 0px 0px;
+    border-right:1px solid rgb(216, 209, 209);
+    border-top: 0.5px solid rgb(216, 209, 209);
+    box-shadow: 8.5px -4.5px 22px -16px black ;
+    mix-blend-mode:color-dodge;
+}
+.price-range{
+    width: 16vmax;
+}
+/*--customize--*/
+.price-range .css-25xzai-MuiSlider-root{
+    color:rgb(199, 29, 199) !important;
+}
+.price-range .css-1ucwjgd-MuiSlider-markLabel{
+    font-size: 13px !important;
+    font-weight:600 !important;
+    color:rgb(87, 85, 85) !important;
+    top: 23px !important;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+.price-range .css-1bvr8oc-MuiSlider-markLabel{
+    font-size: 13px !important;
+    font-weight:600 !important;
+    color:rgb(87, 85, 85) !important;
+    top: 23px !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+/*--------category--------*/
+.categoryBox{
+    list-style: none;
+    color: rgb(54, 53, 53);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.categoryBox li{
+   
+    font-size: 16px;
+    padding: 2px 0px 0px 8px;
+    font-weight:400;
+}
+.categoryBox li:hover{
+    color:rgb(0, 0, 0);
+    /* text-decoration: underline; */
+    font-weight: 600;
+    font-size: 18px;
+     cursor: pointer; letter-spacing: 8px;
+    transition: all 0.6s;
+}
+
+/*--------ratings-------*/
+.ratings{
+    width:17vmax;
+    margin:6px 0px;
+}
+.ratings > fieldset{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.ratings .css-25xzai-MuiSlider-root{
+    width:15vmax !important;
+    margin:1px 0px 8px 1px !important;
+}
+
+/*--customize--*/
+.ratings .css-25xzai-MuiSlider-root{
+    color:rgb(199, 196, 18) !important;
+}
+.ratings .css-1ucwjgd-MuiSlider-markLabel{
+    font-size: 13px !important;
+    font-weight:600 !important;
+    color:rgb(87, 85, 85) !important;
+    top: 20px !important;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+.ratings .css-1bvr8oc-MuiSlider-markLabel{
+    font-size: 13px !important;
+    font-weight:600 !important;
+    color:rgb(87, 85, 85) !important;
+    top: 20px !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+/*pagination styles--------------------------------*/
+
+.paginationBox{
+    display: flex;
+    justify-content: center; 
+    margin: 1vmax auto;
+}
+.pagination{
+    /* border: 1px solid green; */
+    display:flex;
+    width:40vmax;
+    list-style: none;
+
+}
+.page-item{
+    border:2px solid rgb(168, 166, 166);
+    border-right:none;
+    width:12.5vmax;
+    height:3.5vmax;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font: 400 1.3vmax "Roboto";
+    transition: all 0.4s;
+
+}
+.page-item:hover{
+    background-color: rgb(219, 213, 213);
+}
+
+.page-link{
+    text-decoration: none;
+    color:rgb(85, 84, 84);
+}
+
+.page-item:hover .page-link{
+    color:rgb(8, 8, 8);
+}
+
+.page-item-first{
+    border-radius: 5px 0px 0px 5px;
+    border: 2px solid rgb(168, 166, 166);
+    border-right:none;
+}
+
+.page-item-last{
+    border-radius: 0px 5px 5px 0px;
+    border:2px solid rgb(168, 166, 166);
+
+}
+
+.page-active-item{
+    background-color: rgb(248, 136, 96);
+    border-top:2px solid rgb(248, 136, 96);
+    border-:2px solid rgb(248, 136, 96);
+}
+
+.page-active-item-link{
+    color:white;
+}

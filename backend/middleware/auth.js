@@ -5,7 +5,15 @@ const User = require("../models/userModel");
 
 exports.isAuthenticatedUser = catchAsyncErrors( async( req, res, next)=>{
     
-    const {token} = req.cookies;
+    // const {token} = req.cookies;                  //now we are not using cookies to store token 
+
+    let token;
+    if(req.headers.authorization){
+        token = req.headers.authorization.split(" ")[1];
+    }
+    else{
+        token = false;
+    }
 
     if(!token){
        next( new ErrorHandler( 401, " Please Login to access this resource"));
@@ -19,7 +27,7 @@ exports.isAuthenticatedUser = catchAsyncErrors( async( req, res, next)=>{
     next();
 })
 
-exports.authorizeRoles = (...roles) =>{
+exports.authorizeRoles = (...roles) =>{                                              //function always have an invisible array
     return ( req, res ,next)=>{
         
         if(!roles.includes( req.user.role)){

@@ -1,4 +1,4 @@
-import { Fragment, useEffect} from "react";
+import { Fragment, useEffect, useState} from "react";
 import axios from "axios";
 import { useParams} from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux";
@@ -10,6 +10,7 @@ import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard.jsx";
 import "./ProductDetails.css";
 import MetaData from "../layout/MetaData.jsx";
+import { addToCart} from "../../features/Slices/CartSlice.jsx";
 
 export default function ProductDetails(){
 
@@ -17,6 +18,13 @@ export default function ProductDetails(){
     const { product, loading, error} = useSelector(state=>state.products);
     const dispatch = useDispatch();
     const alert = useAlert();
+
+    const [ quantity, setQuantity] = useState(1);
+
+    const addToCartHandler = ()=>{
+        dispatch(addToCart( { productId: product._id, name: product.name, price: product.price, image: product.images[0].url, stock: product.Stock, quantity: quantity}));
+        alert.success("Item Added TO Cart")
+    }
 
     useEffect(()=>{
         async function getDetail(){
@@ -34,7 +42,6 @@ export default function ProductDetails(){
         }
         getDetail();
     },[]);
-
 
     const options ={
         edit:false,
@@ -64,7 +71,7 @@ export default function ProductDetails(){
                             return(
                                 <img
                                 className="CarouselImage"
-                                key={item.url}
+                                key={i}
                                 src={item.url}
                                 alt={`${i} Slide`}
                                 />
@@ -85,12 +92,12 @@ export default function ProductDetails(){
                         <h1>&#8377;{product.price}</h1>
                         <div className="details-3-1">
                             <div className="details-3-1-1">
-                                <button>-</button>
-                                <input type="number"/>
-                                <button>+</button>
+                                <button onClick={()=>setQuantity( quantity>1 ? quantity-1 : quantity)}>-</button>
+                                <input type="number" value={ quantity} readOnly/>
+                                <button onClick={()=>{ setQuantity(  product.Stock>quantity ? quantity+1 : quantity )}} >+</button>
                             </div>
                             <div className="details-3-1-2">
-                                <button>Add to Cart</button>
+                                <button onClick={ addToCartHandler}>Add to Cart</button>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,60 @@
+.cartItemCard > img{
+    width:5vmax;
+    height:7vmax;
+}
+
+.cartItemCard{
+    display:flex; 
+    margin-left:1vmax;
+}
+
+.cartItemCard > div{
+    margin-left: 1vmax;
+    display: flex;
+    flex-direction: column;
+}
+
+.cartItemCard > div > a{
+    text-decoration: none;
+    color:rgba(0, 0, 0, 0.877);
+    font: 600 1vmax "Roboto";
+    letter-spacing: 0.7px;
+    margin-top:0.5vmax;
+}
+
+.cartItemCard > div > span{
+    color:rgba(39, 37, 37, 0.932);
+    font: 600 1vmax "Roboto";
+    letter-spacing: 0.5px;
+    margin-top:0.1vmax;
+}
+
+.cartItemCard > div > p{
+    color:tomato;
+    width:6vmax;
+    font: 600 1.1vmax "Roboto";
+    letter-spacing: 0.7px;
+    margin-top:0.1vmax;
+    cursor:default;
+    transition:all 0.5s;
+}
+
+.cartItemCard > div > p:hover{
+    color: white;
+    background-color:tomato;
+    font-weight: 400;
+    border-radius:5px;
+    border-left: 3px solid tomato;
+    padding:2px 1px;
+    
+    letter-spacing: 3.5px;
+    
+}
+
+
+
+
+
+
+
+

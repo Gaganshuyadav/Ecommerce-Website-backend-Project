@@ -1,4 +1,4 @@
-import "./Product.css";
+import "./Products.css";
 import { useEffect, Fragment, useState} from "react";
 import axios from "axios";
 import { useSelector, useDispatch} from "react-redux";

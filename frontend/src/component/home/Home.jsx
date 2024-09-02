@@ -16,10 +16,6 @@ export default function Home(){
     const dispatch = useDispatch();
     const alert = useAlert();
 
-    // setTimeout(()=>{
-    //     dispatch(getProduct({hello:"main aa gya"}));
-    // },20000);
-
     useEffect( ()=>{
         async function get(){
         dispatch( getProduct( { loading: true ,products: [], productCount: 0})); 
@@ -30,9 +26,9 @@ export default function Home(){
         catch(err){
             dispatch( getProduct({ loading: false, products: [], productCount: 0, error: err.response.data.message }));
             
-            if(err){
-                alert.error(err.response.data.message);
-            }
+            // if(err){
+            //     alert.error(err.response.data.message);
+            // }
         }
         }
         get();

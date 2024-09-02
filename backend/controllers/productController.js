@@ -20,7 +20,7 @@ exports.createProduct = catchAsyncErrors( async ( req,res,next)=>{
 exports.getAllProducts = catchAsyncErrors( async ( req, res, next)=>{
   
     // return next( new ErrorHandler(500, "this is created by user"));
-    console.log(req.query);
+    // console.log(req.query);
 
     // count documents
     const productCount = await Product.countDocuments();

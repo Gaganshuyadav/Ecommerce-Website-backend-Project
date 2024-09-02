@@ -4,10 +4,21 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors.js");
 const sendToken = require("../utils/jwtToken.js");
 const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail.js");
+const cloudinary = require("cloudinary").v2;
 
 // register User( Signup User)
 
 exports.registerUser = catchAsyncErrors( async ( req, res)=>{
+
+   
+    console.log(req.body);
+    const myCloud = await cloudinary.uploader.upload( req.body.avatar, {
+        folder: "/Ecommerce-100-3/avatars",
+        width: 150,
+        crop: "scale",
+    });
+
+    console.log(myCloud)
     const { name, email, password } = req.body;
 
     const user = await User.create({
@@ -15,8 +26,8 @@ exports.registerUser = catchAsyncErrors( async ( req, res)=>{
         email,
         password,
         avatar:{
-            public_id: "this is a sample id",
-            url: "profilePicURL",
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
         },
     });
 
@@ -54,15 +65,21 @@ exports.loginUser = catchAsyncErrors( async( req, res, next)=>{
 // Logout User
 exports.logoutUser = catchAsyncErrors( async( req, res)=>{
 
-    options = {
-        expires: new Date( Date.now() ),
-        httpOnly: true,
-    }
+    // options = {
+    //     expires: new Date( Date.now() ),
+    //     httpOnly: true,
+    // }
 
-    res.status(200).cookie("token", null, options).json({
+    // res.status(200).cookie("token", null, options).json({
+    //     success: true,
+    //     message:"Logged Out",
+    // });
+
+    //use localStorage to logout the user
+    res.status(200).json({
         success: true,
-        message:"Logged Out",
-    });
+        message: "Logout Successfully"
+    })
 })
 
 // Forgot Password
@@ -81,7 +98,8 @@ exports.forgotPassword = catchAsyncErrors( async( req, res, next)=>{
     // save the tokenResetPassoword and tokenResetPassowordExpireTime
     await user.save({validateBeforeSave: false});
 
-    const resetPasswordUrl = `${ req.protocol}://${ req.get("host")}/api/v1/password/reset/${resetToken}`;
+    //req.get("host")
+    const resetPasswordUrl = `${ req.protocol}://${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
   
     const message = `Your password reset token is :- ${resetPasswordUrl} \n\n If you have not requested this email
         then, please ignore it `;
@@ -111,9 +129,9 @@ exports.forgotPassword = catchAsyncErrors( async( req, res, next)=>{
 exports.resetPassword = catchAsyncErrors( async( req,res, next)=>{
 
     const { resetToken} = req.params;
-    const { password, conformPassword} = req.body;
+    const { newPassword, confirmPassword} = req.body;
 
-    if(!(password == conformPassword)){
+    if(!(newPassword == confirmPassword)){
         return next( new ErrorHandler( 400, "password and reset password does not match")); 
     }
 
@@ -129,7 +147,7 @@ exports.resetPassword = catchAsyncErrors( async( req,res, next)=>{
         return next( new ErrorHandler(404, "Reset Password token is invalid or has been expired"));
     }
 
-    user.password = password;
+    user.password = newPassword;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 
@@ -160,7 +178,7 @@ exports.updatePassword = catchAsyncErrors( async( req, res, next)=>{
         return next( new ErrorHandler( 401, "old password is incorrect"));
     }
 
-    if(req.body.newPassword != req.body.conformPassword){
+    if(req.body.newPassword != req.body.confirmPassword){
         return next( new ErrorHandler( 400, "password does not match"));
     }
 
@@ -176,10 +194,26 @@ exports.updateProfile = catchAsyncErrors( async ( req, res, next)=>{
 
     const newUserData = {
         name: req.body.name ,
-        email: req.body.password
+        email: req.body.email
     };
 
-    // this area is for cloudinary and used for user avatar
+    if(req.body.avatar !==""){
+        const user = await User.findById(req.user.id);
+        const imageId = user.avatar.public_id;
+
+        const destroy = await cloudinary.uploader.destroy( imageId);
+        console.log("d:---- ",destroy);
+
+        const myCloud = await cloudinary.uploader.upload( req.body.avatar, {
+            folder: "/Ecommerce-100-3/avatars",
+        });    
+        console.log(myCloud)
+
+        newUserData.avatar = {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
+        }
+    }
     
     const user = await User.findByIdAndUpdate( req.user.id , newUserData, {
         new: true,
@@ -189,6 +223,7 @@ exports.updateProfile = catchAsyncErrors( async ( req, res, next)=>{
 
     res.status(200).json({
         success: true,
+        user,
     })
 })
 
