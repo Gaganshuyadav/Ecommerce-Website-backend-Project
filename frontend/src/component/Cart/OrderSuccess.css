@@ -1,0 +1,23 @@
+.orderSuccess{
+    width:100vw;
+    height:100vh;
+    background-color: rgb(218, 213, 213);
+    text-align: center;
+    place-content: center ;
+}
+
+.orderSuccess > svg{
+    color:tomato;
+    font-size: 8vmax;
+}
+
+.orderSuccess > a{
+    font: 400 1vmax "Roboto";
+    letter-spacing: 0.1vmax;
+    background-color: rgb(47, 48, 47);
+    color:white;
+    text-decoration: none;
+    padding: 0.8vmax 1.3vmax;
+    margin-top:1vmax;
+    display: inline-block;
+}

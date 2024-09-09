@@ -1,0 +1,120 @@
+.orderDetailsPage{
+}
+
+.orderContainer{
+    width:60vw;
+}
+.id p{
+    text-align: center;
+    font-size: 2.5vmax;
+    padding-bottom: 0.6vmax;
+    color:tomato;
+}
+
+.shippingInfo{
+    padding:7vmax;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+}
+
+.shippingInfo > p{
+    font: 600 2vmax "Roboto";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(0, 0, 0);
+    letter-spacing: 1px;
+    text-shadow: 0px 0px 0px black;
+}
+
+.shippingInfo > div{
+    margin-left:3vmax;
+}
+
+.shippingInfo > div > div{
+    display:flex;
+    margin-top: 1.7vmax;
+}
+
+.shippingInfo > div > div > p{
+    font: 400 1.2vmax "Roboto";
+    color:rgb(0, 0, 0);
+    text-shadow: 0px 0px 0px black;
+}
+
+.shippingInfo > div > div > span{
+    color:#575757;
+    font:400 1.2vmax "Roboto";
+    margin-left: 2vmax;
+}
+
+
+.payment{
+    padding:7vmax;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+}
+
+.payment > p{
+    font: 600 2vmax "Roboto";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(0, 0, 0);
+    letter-spacing: 1px;
+    text-shadow: 0px 0px 0px black;
+}
+
+.payment > div {
+    margin-left:3vmax;
+}
+
+.payment > div >div{
+    display:flex;
+    margin-top: 1.7vmax;
+}
+
+
+
+/*ordered items*/
+.orderItems{
+    margin-top: 2vmax;
+    width:60vw;
+}
+
+.orderItemsContainer{
+    margin-top: 2vmax;
+}
+
+.orderItemsContainer > div{ 
+    margin-left: 3vmax;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2vmax;
+}
+
+.orderItemsContainer > div >div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orderItemsContainer > div > div > img{
+    width:5vmax;
+    border:1px solid rgb(175, 172, 172);
+} 
+
+.orderItemsContainer > div > div > a{
+    text-decoration: none;
+    color:#4e4d4d;
+    margin-left: 5vmax;
+    font:600 1.2vmax "Roboto";
+
+}
+
+.orderItemsContainer > div > span{
+    font: 400 1.1vmax "Roboto";
+    color:rgba(0, 0, 0, 0.822);
+    letter-spacing: 0.5px;
+    margin-right:4vmax;
+
+}

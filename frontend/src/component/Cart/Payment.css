@@ -1,0 +1,39 @@
+.paymentContainer{
+    width:100vw;
+    display: grid;
+    place-items: center;
+    margin-top:3vmax;
+}
+
+.paymentForm{
+    border:2px solid rgba(128, 128, 128, 0.76);
+    padding:3vmax 4.3vmax;
+    /* box-sizing: border-box; */
+    border-radius:5px;
+    /* outline-color: tomato; */
+    /* font:400 1.2vmax "Roboto"; */
+    /* color:black; */
+}
+
+.paymentFormBtn{
+    border:none;
+    background-color: orangered;
+    margin: 1vmax auto;
+    margin-top: 3vmax;
+    color:white;
+    letter-spacing: 0.7px;
+    border-radius: 5px;
+    width:22vmax;
+    padding: 1vmax 0vmax;
+    display:block;
+    font: 400 1vmax "Roboto";
+    text-align:center;
+    box-shadow: 1px 1px 7px gray;
+}
+
+.paymentFormBtn:hover{
+    background-color: rgb(223, 16, 16);
+    transition: all 0.5s;
+    box-shadow: 0px 0px 3px 3px rgb(231, 179, 159);
+}
+

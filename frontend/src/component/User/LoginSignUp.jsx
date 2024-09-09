@@ -27,6 +27,11 @@ export default function LoginSignUp(){
     const navigate = useNavigate();
     const alert = useAlert();
     
+
+    //Redirect To ( by Cart)
+    const redirectTo = location.search ? `/${location.search.split("=")[1]}` : "/account";
+   
+
     // useEffect
     useEffect(()=>{
         if(error){
@@ -34,7 +39,7 @@ export default function LoginSignUp(){
             dispatch(clearError);
         }
         if(isAuthenticated){
-            navigate("/account");
+            navigate(redirectTo);
         }
     },[ error, isAuthenticated]);
    

@@ -1,0 +1,158 @@
+.confirmOrderPage{
+    display: flex;
+    width:100vw;
+    margin-top: 5vmax;
+}
+.box1{
+    width:60%;
+    border-right: 1px solid gray;
+    margin-left:3vmax;
+}
+.box2{
+    width:40%;
+}
+
+/*shipping Info*/
+
+.confirmShippingArea{
+    margin-top: 1px;    
+}
+
+.confirmShippingAreaBox{
+    margin-left: 3vmax;
+    margin-top: 1vmax;
+}
+.confirmShippingAreaBox > div{
+    display:flex;
+    margin-bottom: 1vmax;
+}
+.confirmShippingAreaBox > div > p{
+    font: 600 1.02vmax "Roboto";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(0, 0, 0);
+    letter-spacing: 1px;
+    text-shadow: 0px 0px 0px black;
+}
+.confirmShippingAreaBox > div > span{
+    margin-left: 1vmax;
+    font: 400 1.1vmax "Roboto";
+    color: #575757;
+}
+
+/*your cart items*/
+.confirmCartItems{
+    margin-top: 2vmax;
+}
+
+.confirmCartItemsContainer{
+    margin-top: 2vmax;
+}
+
+.confirmCartItemsContainer > div{ 
+    margin-left: 3vmax;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2vmax;
+}
+
+.confirmCartItemsContainer > div >div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmCartItemsContainer > div > div > img{
+    width:5vmax;
+    border:1px solid rgb(175, 172, 172);
+} 
+
+.confirmCartItemsContainer div > div > a{
+    text-decoration: none;
+    color:#4e4d4d;
+    margin-left: 5vmax;
+    font:600 1.2vmax "Roboto";
+
+}
+
+.confirmCartItemsContainer div > span{
+    font: 400 1.1vmax "Roboto";
+    color:rgba(0, 0, 0, 0.822);
+    letter-spacing: 0.5px;
+    margin-right:4vmax;
+
+}
+
+/*Order Summery*/
+
+.orderSummery{
+    padding:7vmax;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+}
+
+.orderSummery > p{
+    text-align: center;
+    padding-bottom: 0.6vmax;
+    border-bottom: 1px solid gray;
+}
+
+.orderSummery > div > div{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 1.7vmax;
+}
+
+.orderSummery > div > div > p{
+    font: 400 1.2vmax "Roboto";
+    color:rgb(0, 0, 0);
+    text-shadow: 0px 0px 0px black;
+}
+
+.orderSummery > div > div > span{
+    color:#575757;
+    font:400 1.2vmax "Roboto";
+}
+
+.orderSummery > div:nth-child(2){
+    border-bottom: 1px solid gray;
+    padding-bottom:1.5vmax;
+}
+.totalPrice{
+    margin-top: 1vmax;
+    display:flex;
+    justify-content: space-between;
+}
+
+.totalPrice > p{
+    font: 400 1.2vmax "Roboto";
+    color:rgb(0, 0, 0);
+    text-shadow: 0px 0px 0px black;
+    letter-spacing: 1px;
+}
+
+.totalPrice > span{
+    color:#575757;
+    font:400 1.2vmax "Roboto";
+}
+
+.orderSummery > button{
+    border:none;
+    background-color: orangered;
+    margin-top: 2vmax;
+    color:white;
+    letter-spacing: 0.7px;
+    border-radius: 5px;
+    padding: 0.7vmax 3vmax;
+    font: 400 1vmax "Roboto";
+    text-align:center;
+    box-shadow: 1px 1px 7px gray;
+}
+
+
+.orderSummery > button:hover{
+    background-color: rgb(223, 16, 16);
+    transition: all 0.5s;
+    box-shadow: 0px 0px 3px 3px rgb(231, 179, 159);
+}

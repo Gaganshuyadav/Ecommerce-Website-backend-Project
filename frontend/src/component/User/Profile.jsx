@@ -7,6 +7,7 @@ import Loader from "../layout/Loader/Loader";
 export default function Profile(){
 
     const { user, loading } = useSelector( state=>state.user);
+    
     return(
         <Fragment>
           {

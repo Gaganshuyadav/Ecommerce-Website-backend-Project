@@ -58,7 +58,7 @@ export default function UserOptions({ user}){
                   direction="down"
                   onOpen={ ()=>{setOpen(true)}}
                   onClose={ ()=>{setOpen(false)}}
-                  open={ true}
+                  open={ open}
                   sx={{position:"fixed", right:"25px", top:"15px",zIndex:"12"}}
                   icon={<img src={user.avatar.url ? user.avatar.url : "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0= "} 
                         style={{width:"70px",height:"70px",objectFit:"fix",borderRadius:"50%"}} alt="Profile" 

@@ -6,6 +6,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors.js");
 // Create New Order
 exports.newOrder = catchAsyncErrors( async ( req, res, next)=>{
 
+    console.log(req.body);
     const { shippingInfo, orderItems, paymentInfo, itemsPrice, taxPrice, shippingPrice, totalPrice} = req.body;
 
     const order = await Order.create({
@@ -89,9 +90,9 @@ exports.updateOrder = catchAsyncErrors( async( req, res, next)=>{
     }
 
 
-    order.orderItems.forEach( async(item)=>{
+    order.orderItems.forEach( async (item)=>{
 
-        const product = await Product.findById( item.product._id);
+        const product = await Product.findById( item.productId._id);
         product.Stock = product.Stock - item.quantity;
         await product.save({ validateBeforeSave: false});
     })

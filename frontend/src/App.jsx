@@ -1,4 +1,4 @@
-import { useEffect,useS } from "react";
+import { useEffect,useState } from "react";
 import Header from "./component/layout/Header/Header";
 import Footer from "./component/layout/Footer/Footer.jsx";
 import Home from "./component/home/Home.jsx";
@@ -19,6 +19,14 @@ import UpdatePassword from "../src/component/User/UpdatePassword.jsx";
 import ForgotPassword from "../src/component/User/ForgotPassword.jsx";
 import ResetPassword from "../src/component/User/ResetPassword.jsx";
 import Cart from "./component/Cart/Cart.jsx";
+import Shipping from "./component/Cart/Shipping.jsx";
+import ConfirmOrder from "./component/Cart/ConfirmOrder.jsx";
+import axios from "axios";
+import OrderSuccess from "./component/Cart/OrderSuccess.jsx";
+import MyOrders from "./component/Order/MyOrders.jsx";
+import OrderDetails from "./component/Order/OrderDetails.jsx";
+//payment
+import PaymentKey from "./component/Cart/PaymentKey.jsx";
 
 function App() {
   
@@ -26,18 +34,22 @@ function App() {
   const dispatch = useDispatch();
   const alert = useAlert();
 
+
   useEffect(()=>{
+
+    //load the font 
     webFont.load({
       google: {
         families: ["Roboto","Drop Sans","Chilanka"],
       }
     }) 
-    //load user using token
+
+    //load user using token 
     dispatch(loadUser());
-    
+
   },[]);
 
-
+  
   return (
     <>
     <Header/>
@@ -54,8 +66,19 @@ function App() {
       <Route path="/password/update" element={ isAuthenticated ? <UpdatePassword/>: <Navigate to="/login"/>} />
       <Route path="/password/forgot" element={<ForgotPassword/>}/>
       <Route path="/password/reset/:token" element={<ResetPassword/>} />
+
+
       <Route path="/cart" element={<Cart/>} />
-    </Routes>
+      <Route path="/shipping" element={ isAuthenticated ? <Shipping/> : <Navigate to="/login"/> } />
+      <Route path="/order/confirm" element={ isAuthenticated ? <ConfirmOrder/> : <Navigate to="/login"/>} />
+      {/* payment route */}
+      <Route path="/process/payment" element={ isAuthenticated ? <PaymentKey/> : <Navigate to="/login"/>} />
+      <Route path="/success" element={<OrderSuccess/>}/>
+      <Route path="/orders" element={ isAuthenticated ? <MyOrders/> : <Navigate to="/login"/>} />
+      <Route path="/order/details/:id" element={ isAuthenticated ? <OrderDetails/> : <Navigate to="/login" />} /> 
+
+
+      </Routes>
     <Footer/>
     </>
   )
