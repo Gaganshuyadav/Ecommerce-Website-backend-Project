@@ -35,7 +35,7 @@ export default function UserOptions({ user}){
     }
 
     const dashboard = () =>{
-        navigate("/dashboard")
+        navigate("/admin/dashboard")
     }
 
     const options = [

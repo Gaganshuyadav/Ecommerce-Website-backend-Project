@@ -1,0 +1,55 @@
+.productListContainer{
+    width: 90%;
+    margin:3vmax auto;
+}
+
+.productListContainer > p{
+    font-size: 1.7vmax;
+    text-align:center;
+    margin:1vmax auto;
+}
+
+.MuiDataGrid-columnHeader{
+    background-color: tomato;
+    color:white;
+    font-size: 1.2vmax;
+}
+
+.MuiDataGrid-columnSeparator{
+    width:0px;
+}
+
+.MuiDataGrid-row {
+    color:black;
+}
+
+.renderCellEditDelete{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.renderCellEditDelete >  a{
+    width:2vmax;
+    height:2.1vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgb(117, 114, 114);
+}
+
+.renderCellEditDelete >  button{
+    min-width:2vmax;
+    padding:0vmax;
+    margin:0vmax;
+    color:rgb(117, 114, 114);
+}
+
+
+.renderCellEditDelete >  a:hover,
+.renderCellEditDelete >  button:hover{
+    color:tomato;
+    transition: 300ms;
+}
+
+

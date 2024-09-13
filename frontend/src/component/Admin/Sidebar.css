@@ -1,0 +1,73 @@
+.sidebar{
+    width:20vw;
+    margin-left:2vmax;
+}
+
+.sidebar{
+    /* border-right:2px solid rgba(128, 128, 128, 0.568); */
+}
+
+.sidebar > a{
+    text-decoration: none;
+} 
+
+.sidebar > ul > li >ul > div >div >a {
+    text-decoration: none;
+} 
+
+.sidebar > ul > li > div{
+    margin-top: 1vmax;
+    margin-bottom: 0;
+    padding: 0px 1px;
+}
+
+.sidebar > ul > li > svg{
+    font-size: 26px;
+}
+
+.logo > img{
+    width:10vmax;
+    margin-top:7vmax;
+}
+.logo > img:hover{
+    filter:drop-shadow(0 0 10px tomato);
+    transition: all 300ms;
+}
+
+.all , .create, .orders, .users, .products, .reviewsD , .dashboardSidebar{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.all > svg , .create > svg {
+    margin-left: 2vmax;
+    color:black;
+}
+.create > li{
+    transform: translateX(-14px);
+}
+.all > li  {
+    transform: translateX(-10px);
+}
+.all > li > div , .create > li > div{
+    gap:0px;
+    padding: 4px 0px;
+}
+.all > li > div , .create > li > div {
+    color: black;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.reviewsD{
+    margin:0px;
+}
+.orders, .products, .users, .reviewsD, .dashboardSidebar{
+    color:black;
+    margin-top:2vmax;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.sidebar > ul{
+    margin-top:2vmax;
+}
+

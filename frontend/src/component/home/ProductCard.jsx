@@ -8,7 +8,7 @@ export default function Product({ product }){
         edit:false,
         color: "rgba(20,20,20,0.1)",
         size: window.innerWidth < 600 ? 19 : 26,
-        activeColor:"tomato",
+        activeColor:"#faaf00",
         value: product.ratings,
         isHalf: true,
 

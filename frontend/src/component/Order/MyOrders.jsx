@@ -41,7 +41,7 @@ export default function MyOrders(){
 
     const rows = orders 
     ? (orders.map( (item, idx)=>{
-        return { id: item._id, status: item.orderStatus, itemsQty: item.orderItems.length, amount: item.totalPrice, actions: "[{}]" }
+        return { id: item._id, status: item.orderStatus, itemsQty: item.orderItems.length, amount: item.totalPrice }
     }) ) 
     : [];
 

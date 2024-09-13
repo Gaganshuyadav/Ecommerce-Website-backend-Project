@@ -2,14 +2,44 @@ const Product = require("../models/productModel.js");
 const ErrorHandler = require("../utils/errorHandler.js");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors.js");
 const ApiFeature = require("../utils/apifeatures.js");
+const cloudinary = require("cloudinary").v2;
+
 
 // Create Product  --Admin
 exports.createProduct = catchAsyncErrors( async ( req,res,next)=>{
     
     req.body.user = req.user.id;                   // add admin who are created the product
     
-    const product = await Product.create(req.body);
+    //identify how many images are received
+    let images=[];
+    if((typeof req.body.images)==="string"){
+        images.push(req.body.images);
+    }
+    else{
+        images = req.body.images;
+    }
 
+    const imagesLinks=[];
+    //upload image in cloudinary one by one
+    for(let image of images){
+
+        const myCloud = await cloudinary.uploader.upload(image , {
+            folder: "/Ecommerce-100-3/products",
+        });
+
+        imagesLinks.push({ 
+            public_id: myCloud.public_id, 
+            url: myCloud.secure_url
+        });
+        
+    }
+
+    //initialize array
+    req.body.images = imagesLinks;
+
+    const product = await Product.create( req.body);
+    console.log(product)
+    
     res.status(200).json({
         success:true,
         product
@@ -85,45 +115,94 @@ exports.getSingleProduct = catchAsyncErrors( async ( req, res, next)=>{
 })
 
 
-// Update All Product --Admin
-exports.updateProduct = catchAsyncErrors( async ( req, res, next)=>{
-    const find = await Product.findById(req.params.id);
-    console.log("find ",find);
-    if(!find){
+// Get All Products --Admin 
+exports.getAdminProducts = catchAsyncErrors( async ( req, res, next)=>{
 
+    const products = await Product.find();
+  
+    res.status(200).json({
+        success:true,
+        products,
+    });
+
+})
+
+
+
+// Update Product --Admin
+exports.updateProduct = catchAsyncErrors( async ( req, res, next)=>{
+
+    const find = await Product.findById(req.params.id);
+    
+    if(!find){
        return next( new ErrorHandler( 500, "Product Not Found"))
     }
+
+    // Delete old Images from Cloudinary before update
+    for(let image of find.images){
+        const result = await cloudinary.uploader.destroy( image.public_id);
+    }
+
+    // receive images from request[ can be string or array according to forData]
+    let images = [];
+    if( (typeof req.body.images)==="string"){
+        images.push(req.body.images);
+    }
     else{
+        images = req.body.images;
+    }
+
+
+    // upload new images in Cloudinary and store all links in array
+    const imagesLinks=[];
+    for(let image of images){
+
+        const result = await cloudinary.uploader.upload( image , {
+            folder: "/Ecommerce-100-3/products",
+        });
+
+        imagesLinks.push( { public_id: result.public_id, url: result.secure_url})
+    }
+
+    //add all image links into request
+    req.body.images = imagesLinks;
+
+    //update the database
     const product = await Product.findByIdAndUpdate( req.params.id ,req.body,{ new:true,runValidators:true});
 
     res.status(200).json({
         success:true,
         product
     })
-    }
 
 })
 
 // Delete Product --Admin
 
 exports.deleteProduct = catchAsyncErrors ( async ( req, res, next) =>{
-    const find = await Product.findById(req.params.id);
-    if(!find){
 
+    const find = await Product.findById(req.params.id);
+
+    if(!find){
        return next( new ErrorHandler( 500, "Product Not Found"))
     }
-    else{
-        const product = await Product.findByIdAndDelete(req.params.id);
-        
-        res.status(200).json({
-            success:true,
-            message:"Product Deleted Successfully"
-        })
+
+    //Deleting Images From Cloudinary
+    for(let i=0;i< find.images.length; i++){
+        const result = await cloudinary.uploader.destroy(find.images[i].public_id);
     }
+
+    const product = await Product.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+        success:true,
+        message:"Product Deleted Successfully"
+    })
 })
 
 // Create New Review or Update the review
 exports.createProductReview = catchAsyncErrors( async ( req, res, next)=>{
+    
     const { rating, comment, productId } = req.body;
 
     const review = {
@@ -160,7 +239,12 @@ exports.createProductReview = catchAsyncErrors( async ( req, res, next)=>{
     })
     product.ratings = totalRating/(product.reviews.length) ;
 
-    await product.save();
+    try{
+        await product.save();
+    }
+    catch(err){
+        console.log(err);
+    }
 
     res.status(200).json({
         success: true,

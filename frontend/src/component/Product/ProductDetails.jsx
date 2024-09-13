@@ -2,7 +2,8 @@ import { Fragment, useEffect, useState} from "react";
 import axios from "axios";
 import { useParams} from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux";
-import { getProductDetails} from "../../features/Slices/ProductSlice";
+import { getProductDetails, newReview, clearError, clearMessage} from "../../features/Slices/ProductSlice";
+import { addToCart} from "../../features/Slices/CartSlice.jsx";
 import { useAlert} from "react-alert";
 import Carousel from "react-material-ui-carousel";
 import Loader from "../layout/Loader/Loader";
@@ -10,12 +11,20 @@ import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard.jsx";
 import "./ProductDetails.css";
 import MetaData from "../layout/MetaData.jsx";
-import { addToCart} from "../../features/Slices/CartSlice.jsx";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Rating from "@mui/material/Rating";
+import Button from "@mui/material/Button";
+import { AffirmMessageElement } from "@stripe/react-stripe-js";
+
 
 export default function ProductDetails(){
 
     const params = useParams();
-    const { product, loading, error} = useSelector(state=>state.products);
+    const { product, loading, error, success, message} = useSelector(state=>state.products);
     const dispatch = useDispatch();
     const alert = useAlert();
 
@@ -41,17 +50,51 @@ export default function ProductDetails(){
             }
         }
         getDetail();
-    },[]);
 
+    },[ success]);              //success is important part to load the updated details after submitting the new review
+
+
+    //this is for the review error
+    useEffect(()=>{
+        if(message){
+            alert.success(message);
+            dispatch(clearMessage());
+        }
+        if(error){
+            alert.error(error);
+        }
+        dispatch(clearError());
+    }, [error, message])
+
+    //ratings
     const options ={
         edit:false,
         color: "rgba(20,20,20,0.1)",
         size: window.innerWidth < 600 ? 19 : 26,
-        activeColor:"tomato",
+        activeColor:"#faaf00",
         value: product ? product.ratings : 0 ,
         isHalf: true,
-
+ 
     };
+
+    //add new rating using dialog
+    const [ open, setOpen] = useState(false); 
+    const [ ratingValue, setRatingValue] = useState(1);
+    const [ textReview, setTextReview] = useState("");
+
+    const handleClickOpen =()=>{
+        setOpen(true);
+    }
+
+    const handleClickClose =()=>{
+        setOpen(false);
+    }
+
+    const handleSubmitReview = () =>{
+        dispatch( newReview({rating: ratingValue, comment: textReview, productId: params.id}))
+        setOpen(false);
+    }
+
 
     return(
         
@@ -63,6 +106,7 @@ export default function ProductDetails(){
         :
           <Fragment>
              <MetaData title={`${product.name} -- Ecommerce`}/>
+             {/* product details */}
             <div className="ProductDetails">
                 <div className="block-1">
                 <Carousel>
@@ -97,7 +141,7 @@ export default function ProductDetails(){
                                 <button onClick={()=>{ setQuantity(  product.Stock>quantity ? quantity+1 : quantity )}} >+</button>
                             </div>
                             <div className="details-3-1-2">
-                                <button onClick={ addToCartHandler}>Add to Cart</button>
+                                <button disabled={ product.Stock<1 ? true : false } onClick={ addToCartHandler}>Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -108,15 +152,48 @@ export default function ProductDetails(){
                         <h2>Description :</h2>
                         <p>{product.description}</p>
                     </div>
-                    <button className="submitreview">
+                    <button className="submitreview" onClick={ handleClickOpen}>
                         Submit Review
                     </button>
                 </div>
             </div>
 
 
-            <h3 className="reviewsHeading">REVIEWS</h3>
 
+
+
+            {/* add new reviews */}
+              <Dialog
+                open={open}
+                onClose={handleClickClose}
+              >
+                <div className="addNewReviewDialog">
+                <DialogTitle>Submit Review</DialogTitle>
+                <DialogContent>
+                    <Rating 
+                      name="simple-controlled" 
+                      value={ratingValue} 
+                      onChange={ ( event, newRatingValue)=>{setRatingValue( newRatingValue)}}
+                    />
+                    <DialogContentText>
+                        <textarea rows="8" cols="40" value={textReview} onChange={(e)=>{ setTextReview(e.target.value)}}/>
+                    </DialogContentText>
+                    <DialogActions>
+                        <Button color="error" onClick={handleClickClose}>CANCEL</Button>
+                        <Button color="success" onClick={ handleSubmitReview}>SUBMIT</Button>
+                    </DialogActions>
+                </DialogContent>
+                </div>
+              </Dialog>
+
+
+
+
+
+
+
+            {/* all reviews  */}
+            <h3 className="reviewsHeading">REVIEWS</h3>
             {
             product.reviews && product.reviews[0]
             ?

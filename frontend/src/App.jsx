@@ -25,6 +25,12 @@ import axios from "axios";
 import OrderSuccess from "./component/Cart/OrderSuccess.jsx";
 import MyOrders from "./component/Order/MyOrders.jsx";
 import OrderDetails from "./component/Order/OrderDetails.jsx";
+import Dashboard from "./component/Admin/Dashboard.jsx";
+import ProductList from "./component/Admin/ProductList.jsx";
+import NewProduct from "./component/Admin/NewProduct.jsx";
+import UpdateProduct from "./component/Admin/UpdateProduct.jsx";
+import OrderList from "./component/Admin/OrderList.jsx";
+import ProcessOrder from "./component/Admin/ProcessOrder.jsx";
 //payment
 import PaymentKey from "./component/Cart/PaymentKey.jsx";
 
@@ -55,6 +61,7 @@ function App() {
     <Header/>
     { isAuthenticated && <UserOptions user={user} />}
     <Routes>
+    {/* User Routes */}
       <Route path="/" element={<Home/>} />
       <Route path="/product/:id" element={<ProductDetails/>}/>
       <Route path="/products" element={<Products/>} />
@@ -67,7 +74,6 @@ function App() {
       <Route path="/password/forgot" element={<ForgotPassword/>}/>
       <Route path="/password/reset/:token" element={<ResetPassword/>} />
 
-
       <Route path="/cart" element={<Cart/>} />
       <Route path="/shipping" element={ isAuthenticated ? <Shipping/> : <Navigate to="/login"/> } />
       <Route path="/order/confirm" element={ isAuthenticated ? <ConfirmOrder/> : <Navigate to="/login"/>} />
@@ -75,8 +81,16 @@ function App() {
       <Route path="/process/payment" element={ isAuthenticated ? <PaymentKey/> : <Navigate to="/login"/>} />
       <Route path="/success" element={<OrderSuccess/>}/>
       <Route path="/orders" element={ isAuthenticated ? <MyOrders/> : <Navigate to="/login"/>} />
-      <Route path="/order/details/:id" element={ isAuthenticated ? <OrderDetails/> : <Navigate to="/login" />} /> 
+      <Route path="/order/details/:id" element={ isAuthenticated ? <OrderDetails/> : <Navigate to="/login" />} />
+      <Route path="/" /> 
 
+    {/* Admin Routes */}
+      <Route path="/admin/dashboard" element={<Dashboard/>}/>
+      <Route path="/admin/products" element={<ProductList/>} />
+      <Route path="/admin/create/product" element={<NewProduct/>} />
+      <Route path="/admin/product/:id" element={<UpdateProduct/>} />
+      <Route path="/admin/orders" element={<OrderList/>} />
+      <Route path="/admin/order/:id" element={<ProcessOrder/>} />
 
       </Routes>
     <Footer/>

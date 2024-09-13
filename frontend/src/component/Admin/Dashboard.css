@@ -1,0 +1,86 @@
+.dashboard{
+    width:100vw;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+}
+.dashboard > .leftSide{
+    width:22vw;
+}
+.dashboard > .rightSide{
+    width:82vw;
+    border-left:2px solid rgba(0, 0, 0, 0.24); 
+}
+
+.rightSide > .dashboardSummery > p{
+    margin:2vmax 0px;
+    font-size: 2vmax;
+    text-align: center;
+}
+
+.dsBox1 {
+    text-align: center;
+    width:94%;
+    margin:0 auto;
+    padding: 1vmax 0;
+    font:400 1.2vmax "Roboto";
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    background-color: rgba(0, 0, 255, 0.616);
+    color:white;
+}
+
+.dsBox2{
+    display: flex;
+    width:94%;
+    margin:0 auto;
+    justify-content: center;
+    align-items: center;
+}
+.dsBox2 > div{
+    margin:2vmax 1vmax;
+    width:12vmax;
+    height:12vmax;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dsBox2 > .b1{
+    background-color: red;
+}
+.dsBox2 > .b2{
+    background-color: blue;
+}
+.dsBox2 > .b3{
+    background-color: green;
+}
+
+.dsBox2 > div > a{
+    text-decoration: none;
+}
+
+.dsBox2 > div > a > p{
+    color:white;
+    text-align: center;
+    font:400 1.5vmax "Roboto";
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.lineChart {
+    width:80%;
+    margin:2vmax auto;
+}
+
+.doughnut{
+    width:60%;
+    margin:2vmax auto;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,151 @@
+.processOrderPage{
+    display: flex;
+    width:100vw;
+    margin-top: 5vmax;
+}
+.box1{
+    width:60%;
+    border-right: 1px solid gray;
+    margin-left:3vmax;
+}
+.box2{
+    width:40%;
+}
+
+/*shipping Info*/
+
+.processShippingArea{
+    margin-top: 1vmax;    
+}
+
+.processShippingAreaBox{
+    margin-left: 3vmax;
+    margin-top: 1vmax;
+}
+.processShippingAreaBox > div{
+    display:flex;
+    margin-bottom: 1vmax;
+}
+.processShippingAreaBox > div > p{
+    font: 600 1.02vmax "Roboto";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(0, 0, 0);
+    letter-spacing: 1px;
+    text-shadow: 0px 0px 0px black;
+}
+.processShippingAreaBox > div > span{
+    margin-left: 1vmax;
+    font: 400 1.1vmax "Roboto";
+    color: #575757;
+}
+
+/*ordered items*/
+.processOrderItems{
+    margin-top: 2vmax;
+}
+
+.Container > div{ 
+    margin-left: 3vmax;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2vmax;
+}
+
+.Container > div >div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Container > div > div > img{
+    width:5vmax;
+    border:1px solid rgb(175, 172, 172);
+} 
+
+.Container div > div > a{
+    text-decoration: none;
+    color:#4e4d4d;
+    margin-left: 5vmax;
+    font:600 1.2vmax "Roboto";
+
+}
+
+.Container div > span{
+    font: 400 1.1vmax "Roboto";
+    color:rgba(0, 0, 0, 0.822);
+    letter-spacing: 0.5px;
+    margin-right:4vmax;
+
+}
+
+/*Process Summery*/
+
+.processSummery{
+    padding:7vmax;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+}
+
+.processSummery > p{
+    text-align: center;
+    padding-bottom: 0.6vmax;
+    border-bottom: 1px solid gray;
+}
+
+.processSummery > div > div{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 1.7vmax;
+}
+
+.processSummery > div > div > p{
+    font: 400 1.2vmax "Roboto";
+    color:rgb(0, 0, 0);
+    text-shadow: 0px 0px 0px black;
+}
+
+.processSummery > div > div > span{
+    color:#575757;
+    font:400 1.2vmax "Roboto";
+}
+
+.processSummery > div:nth-child(2){
+    border-bottom: 1px solid gray;
+    padding-bottom:1.5vmax;
+}
+
+
+
+.processOrder > select
+{
+    border:2px solid rgba(128, 128, 128, 0.76);
+    width: 22.7vmax;
+    padding: 0.8vmax 0vmax 0.8vmax 4vmax;
+    box-sizing: border-box;
+    border-radius:5px;
+    outline-color: tomato;
+    font:400 1.2vmax Roboto;
+}
+
+
+.processSummery > button{
+    border:none;
+    background-color: orangered;
+    margin-top: 2vmax;
+    color:white;
+    letter-spacing: 0.7px;
+    border-radius: 5px;
+    padding: 0.7vmax 3vmax;
+    font: 400 1vmax "Roboto";
+    text-align:center;
+    box-shadow: 1px 1px 7px gray;
+}
+
+
+.processSummery > button:hover{
+    background-color: rgb(223, 16, 16);
+    transition: all 0.5s;
+    box-shadow: 0px 0px 3px 3px rgb(231, 179, 159);
+}

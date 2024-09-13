@@ -1,18 +1,24 @@
 .orderDetailsPage{
+    width:100vw;
 }
 
 .orderContainer{
+    margin: 10vmax 0vmax 4vmax 10vmax;
     width:60vw;
 }
-.id p{
-    text-align: center;
+
+.id > p{
+    margin-bottom: 1vmax;
     font-size: 2.5vmax;
+    font:400 2.5vmax "Roboto";
     padding-bottom: 0.6vmax;
     color:tomato;
 }
 
+/*shipping Info*/
+
 .shippingInfo{
-    padding:7vmax;
+    margin-top: 2vmax;
     box-sizing: border-box;
     display:flex;
     flex-direction: column;
@@ -47,9 +53,10 @@
     margin-left: 2vmax;
 }
 
+/*payment*/
 
 .payment{
-    padding:7vmax;
+    margin-top: 2vmax;
     box-sizing: border-box;
     display:flex;
     flex-direction: column;
@@ -72,12 +79,55 @@
     margin-top: 1.7vmax;
 }
 
+.payment > div > div > p{
+    font: 400 1.2vmax "Roboto";
+    color:rgb(0, 0, 0);
+    text-shadow: 0px 0px 0px black;
+}
 
+.payment > div > div > span{
+    color:#575757;
+    font:400 1.2vmax "Roboto";
+    margin-left: 2vmax;
+}
+
+/*order status*/
+
+
+.orderStatus{
+    margin-top: 2vmax;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+}
+
+.orderStatus > p{
+    font: 600 2vmax "Roboto";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(0, 0, 0);
+    letter-spacing: 1px;
+    text-shadow: 0px 0px 0px black;
+}
+
+.orderStatus > div > p{
+    margin-top:1vmax;
+    font: 400 1.2vmax "Roboto";
+    color:rgb(0, 0, 0);
+    text-shadow: 0px 0px 0px black;
+}
 
 /*ordered items*/
 .orderItems{
     margin-top: 2vmax;
     width:60vw;
+}
+
+.orderItems > p{
+    font: 600 2vmax "Roboto";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(0, 0, 0);
+    letter-spacing: 1px;
+    text-shadow: 0px 0px 0px black;
 }
 
 .orderItemsContainer{

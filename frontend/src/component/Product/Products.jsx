@@ -41,7 +41,7 @@ export default function Products(){
         return `\u20B9${value}`;
     }
     //category
-    const categories = [ "Laptop", "Footwear", "Bottom", "Tops", "Attire", "Camera", "SmartPhones", "Shoes"];
+    const categories = [ "","Laptop", "Footwear", "Bottom", "Tops", "Attire", "Camera", "SmartPhones", "Shoes"];
 
     //main-logic(axios)
     useEffect(()=>{
@@ -54,9 +54,25 @@ export default function Products(){
            }
                       
             try{
-                let link = `http://localhost:3000/api/v1/products?keyword=${params.keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+                let link = `http://localhost:3000/api/v1/products?keyword=${params.keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
                 
+                //for the new product rating is zero when a new product is created
+                if(ratings>1){
+                    link = `http://localhost:3000/api/v1/products?keyword=${params.keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+                
+                }
                 if(category){
+                    console.log("--");
+                    console.log(category)
+                    console.log(ratings);
+                    link = `http://localhost:3000/api/v1/products?keyword=${params.keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`;
+                }
+
+                //bacause by default the product ratings is 0,because at starting no one give the rating
+                if(category && ratings>1){
+                    console.log("--");
+                    console.log(category)
+                    console.log(ratings);
                     link = `http://localhost:3000/api/v1/products?keyword=${params.keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
                 }
 
@@ -111,6 +127,10 @@ export default function Products(){
                     </div>
                     <Typography>Categories</Typography>
                     <ul className="categoryBox">
+
+                        <li style={ ""===category ? { color:"rgb(0, 0, 0)",fontWeight: "600",fontSize: "18px",cursor: "pointer",letterSpacing: "8px",transition: "all 0.6s"}:{}} 
+                            onClick={()=>{ setCategory("")}} >All</li>
+
                     { categories.map( ( ctg, idx)=>{
                             return <li key={idx} style={ ctg===category ? { color:"rgb(0, 0, 0)",fontWeight: "600",fontSize: "18px",cursor: "pointer",letterSpacing: "8px",transition: "all 0.6s"}:{}} 
                             onClick={()=>{ setCategory(ctg)}} >{ctg}</li>

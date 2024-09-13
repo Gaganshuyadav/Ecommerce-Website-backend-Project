@@ -6,7 +6,7 @@ import { useParams} from "react-router-dom";
 import { getOrderDetails} from "../../features/Slices/OrderSlice";
 import Loader from "../layout/Loader/Loader";
 import { Typography } from "@mui/material";
-import { Link} from "react-router-dom"
+import { Link} from "react-router-dom";
 
 export default function OrderDetails(){
 
