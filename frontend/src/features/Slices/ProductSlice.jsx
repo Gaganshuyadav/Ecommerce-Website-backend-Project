@@ -109,6 +109,40 @@ export const getProductDetailsForUpdation = createAsyncThunk("/admin/getDetailsF
     }
 })
 
+//Get All Reviews of a Product
+export const getAllReviews = createAsyncThunk("/admin/review/all" , async( productId, { rejectWithValue})=>{
+    const token = localStorage.getItem("token");
+    try{
+        const { data} = await axios.get(`http://localhost:3000/api/v1/reviews?productId=${productId}`, { headers: { "Content-Type":"application/json", "Authorization":`Bearer ${token}`}});
+        return data;
+    }
+    catch(error){
+        if(error.response){
+            return rejectWithValue({ message: error.response.data.message});
+        }
+        else{
+            return rejectWithValue({ message: error.message});
+        }
+    }
+})
+
+// Delete Review of a Product
+export const deleteReview = createAsyncThunk("/admin/review/delete", async( { productId, reviewId }, { rejectWithValue})=>{
+    const token = localStorage.getItem("token");
+    try{
+        const { data} = await axios.delete(`http://localhost:3000/api/v1/reviews?productId=${productId}&reviewId=${reviewId}`, { headers: {"Content-Type":"application/json", "Authorization":`Bearer ${token}`}});
+        return data;
+    }
+    catch(error){
+        if(error.response){
+            return rejectWithValue({message: error.response.data.message});
+        }
+        else{
+            return rejectWithValue({message: error.response});
+        }
+    }
+})
+
 export const productSlice = createSlice({
     name: "products",
     initialState: {
@@ -123,6 +157,8 @@ export const productSlice = createSlice({
         message:"",
         isDeleted: false,
         isUpdated: false,
+        reviews:[],
+        isReviewDeleted:false,
     },
     reducers: {
         getProduct: ( state, action)=>{
@@ -152,7 +188,10 @@ export const productSlice = createSlice({
         },
         clearSuccess: ( state, action)=>{
             state.success = false;
-        }
+        },
+        clearIsReviewDeleted: ( state, action)=>{
+            state.isReviewDeleted = false;
+        },
     },
     extraReducers: (builder)=>{
         //add new review
@@ -237,9 +276,33 @@ export const productSlice = createSlice({
         builder.addCase( getProductDetailsForUpdation.rejected, ( state, action)=>{
             state.error = action.payload.message;
             state.loading =  false;
+        }),
+        builder.addCase( getAllReviews.pending, ( state, action)=>{
+            state.error = "";
+            state.loading = true;
+        }),
+        builder.addCase( getAllReviews.fulfilled, ( state, action)=>{
+            state.loading = false;
+            state.reviews = action.payload.reviews;
+        }),
+        builder.addCase( getAllReviews.rejected, ( state, action)=>{
+            state.error = action.payload.message;
+            state.loading = false;
+        }),
+        builder.addCase( deleteReview.pending, ( state, action)=>{
+            state.error = "";
+            state.loading = true;
+        }),
+        builder.addCase( deleteReview.fulfilled, ( state, action)=>{
+            state.loading = false;
+            state.isReviewDeleted = action.payload.success;
+        }),
+        builder.addCase( deleteReview.rejected, ( state, action)=>{
+            state.error = action.payload.message;
+            state.loading = false;
         })
     }
 })
 
-export const { getProduct, getProductDetails, clearError, clearMessage, clearSuccess} = productSlice.actions;
+export const { getProduct, getProductDetails, clearError, clearMessage, clearSuccess, clearIsReviewDeleted} = productSlice.actions;
 export default productSlice.reducer;

@@ -146,6 +146,76 @@ export const resetPassword = createAsyncThunk( "user/resetPassword", async( { my
     }
 })
 
+// get All users --Admin
+export const getAllUsers = createAsyncThunk( "admin/users", async( noParam, { rejectWithValue})=>{
+    const token = localStorage.getItem("token");
+    try{
+        const { data} = await axios.get("http://localhost:3000/api/v1/admin/users", { headers: { "Content-Type":"application/json", "Authorization":`Bearer ${token}`}});
+        return data;
+    }
+    catch(error){
+        if( error.response){
+            return rejectWithValue({message: error.response.data.message});
+        }
+        else{
+            return rejectWithValue({message: error.message});
+        }
+    }
+})
+
+// get user Details --Admin
+export const getUserDetails = createAsyncThunk( "admin/user/:id", async( id, { rejectWithValue})=>{
+    const token =  localStorage.getItem("token");
+    try{
+        const { data} = await axios.get(`http://localhost:3000/api/v1/admin/user/${id}`, { headers: {"Content-Type":"application/json", "Authorization":`Bearer ${token}`}});
+        return data;
+    }
+    catch(error){
+        if(error.response){
+            return rejectWithValue({message: error.response.data.message});
+        }
+        else{
+            return rejectWithValue({message:error.message});
+        }
+    }
+})
+
+// update user --Admin
+export const updateUser = createAsyncThunk( "admin/user/update", async( { id, formData}, { rejectWithValue})=>{
+    const token = localStorage.getItem("token");
+    try{
+        const { data} = await axios.put(`http://localhost:3000/api/v1/admin/user/${id}`, formData, { headers: { "Content-Type":"application/json", "Authorization":`Bearer ${token}`}});
+        return data;
+    }
+    catch(error){
+        if(error.response){
+            return rejectWithValue({message:error.response.data.message});
+        }
+        else{
+            return rejectWithValue({message:error.message});
+        }
+    }
+})
+
+// delete user --Admin
+export const deleteUser = createAsyncThunk( "admin/user/delete", async( id, { rejectWithValue})=>{
+    const token = localStorage.getItem("token");
+    try{
+        const { data} = await axios.delete(`http://localhost:3000/api/v1/admin/user/${id}`, { headers: { "Content-Type":"application/json", "Authorization":`Bearer ${token}`}});
+        return data;
+    }
+    catch(error){
+        if(error.response){
+            return rejectWithValue({message:error.response.data.message});
+        }
+        else{
+            return rejectWithValue({message:error.message});
+        }
+    }
+})
+
+
+
 
 // (userSlice):-
 export const userSlice = createSlice({
@@ -158,6 +228,8 @@ export const userSlice = createSlice({
         message:"",
         isUpdated:false,
         success: false,
+        users:[],
+        isDeleted:false,
     },
     reducers:{
         clearError: ( state, action)=>{
@@ -165,6 +237,12 @@ export const userSlice = createSlice({
         },
         clearUpdate: ( state, action)=>{
             state.isUpdated = false;
+        },
+        clearIsDeleted: ( state, action)=>{
+            state.isDeleted = false;
+        },
+        clearMessage: ( state, action)=>{
+            state.message = "";
         }
     },
     extraReducers: ( builder)=>{
@@ -280,11 +358,65 @@ export const userSlice = createSlice({
         builder.addCase( resetPassword.rejected, ( state, action)=>{
             state.loading = false;
             state.error = action.payload.message;
+        }),
+        //all users --Admin
+        builder.addCase( getAllUsers.pending, ( state, action)=>{
+            state.error = "";
+            state.loading = true;
+        }),
+        builder.addCase( getAllUsers.fulfilled, ( state, action)=>{
+            state.users = action.payload.users;
+            state.loading = false;
+        }),
+        builder.addCase( getAllUsers.rejected, ( state, action)=>{
+            state.error = action.payload.message;
+            state.loading = false;
+        }),
+        // user details
+        builder.addCase( getUserDetails.pending, ( state, action)=>{
+            state.error = "";
+            state.loading = true;
+        }),
+        builder.addCase( getUserDetails.fulfilled, ( state, action)=>{
+            state.user = action.payload.user;
+            state.loading = false;
+        }),
+        builder.addCase( getUserDetails.rejected, ( state, action)=>{
+            state.error = action.payload.message;
+            state.loading = false;
+        }),
+        //update user --Admin
+        builder.addCase( updateUser.pending, ( state, action)=>{
+            state.error = "";
+            state.loading = true;
+        }),
+        builder.addCase( updateUser.fulfilled, ( state, action)=>{
+            state.isUpdated = true;
+            state.loading = false;
+            state.message = action.payload.message
+        }),
+        builder.addCase( updateUser.rejected, ( state, action)=>{
+            state.error = action.payload.message;
+            state.loading = false;
+        }),
+        //delete user --Admin
+        builder.addCase( deleteUser.pending, ( state, action)=>{
+            state.error = "";
+            state.loading = true;
+        }),
+        builder.addCase( deleteUser.fulfilled, ( state, action)=>{
+            state.isDeleted = true;
+            state.loading = false;
+            state.message = action.payload.message;
+        }),
+        builder.addCase( deleteUser.rejected, ( state, action)=>{
+            state.error = action.payload.message;
+            state.loading = false;
         })
     }
 
 }) 
 
-export const { clearError, clearUpdate} = userSlice.actions;
+export const { clearError, clearUpdate, clearIsDeleted, clearMessage} = userSlice.actions;
 
 export default userSlice.reducer;

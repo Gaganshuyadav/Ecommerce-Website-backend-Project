@@ -1,0 +1,147 @@
+/* right-Side */
+.ReviewContainer{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*container*/
+
+.ReviewContainer > p{
+    font-size:2vmax;
+    margin-top:4vmax;
+    margin-bottom: 2vmax;
+    color: rgb(78, 73, 73);
+}
+
+/*box-1*/
+
+.box111{
+    display:flex;
+    justify-content:center;
+}
+
+.productIdForm{
+    display: flex;
+    flex-direction: column;
+    width: 30vmax;
+    overflow: hidden;
+    border-radius: 3px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 1px 1px 11px gray;
+
+}
+
+
+.productId{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vmax;
+}
+
+
+.productId > input {
+    border:2px solid rgba(128, 128, 128, 0.76);
+    padding:1vmax 4.3vmax;
+    box-sizing: border-box;
+    border-radius:5px;
+    outline-color: tomato;
+    font:400 1.2vmax "Roboto";
+}
+
+.productId > svg
+{
+    position:relative;
+    font-size: 1.7vmax;
+    transform:translate(-9vmax,2.7vmax);
+    color:rgb(88, 85, 85);
+}
+
+.productIdForm > button{
+    width:95%;
+    border:none;
+    background-color: orangered;
+    margin: 2.5vmax auto;
+    color:white;
+    border-radius: 5px;;
+    padding: 0.8vmax 10.5vmax;
+    letter-spacing: 1px;
+    font: 400 1.2vmax "Roboto";
+    text-align:center;
+    box-shadow: 1px 1px 7px gray;
+    transition:all 300ms;
+}
+
+.productIdForm > button:hover{
+    background-color: rgba(255, 68, 0, 0.795);
+}
+
+/*box-2*/
+
+.box222{
+    width: 95%;
+    margin:3vmax auto;
+}
+
+.greenColor{
+    color:green;
+}
+.redColor{
+    color:red;
+}
+
+.MuiDataGrid-columnHeader{
+    background-color: tomato;
+    color:white;
+    font-size: 1.2vmax;
+}
+
+.MuiDataGrid-columnSeparator{
+    width:0px;
+}
+
+.MuiDataGrid-row {
+    color:black;
+}
+
+.renderCellEditDelete{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.renderCellEditDelete >  a{
+    width:2vmax;
+    height:2.1vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgb(117, 114, 114);
+}
+
+.renderCellEditDelete >  button{
+    min-width:2vmax;
+    padding:0vmax;
+    margin:0vmax;
+    color:rgb(117, 114, 114);
+}
+
+
+.renderCellEditDelete >  a:hover,
+.renderCellEditDelete >  button:hover{
+    color:tomato;
+    transition: 300ms;
+}
+
+
+
+
+
+
+
+

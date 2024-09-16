@@ -10,12 +10,8 @@ const cloudinary = require("cloudinary").v2;
 
 exports.registerUser = catchAsyncErrors( async ( req, res)=>{
 
-   
-    console.log(req.body);
     const myCloud = await cloudinary.uploader.upload( req.body.avatar, {
         folder: "/Ecommerce-100-3/avatars",
-        width: 150,
-        crop: "scale",
     });
 
     console.log(myCloud)
@@ -202,7 +198,6 @@ exports.updateProfile = catchAsyncErrors( async ( req, res, next)=>{
         const imageId = user.avatar.public_id;
 
         const destroy = await cloudinary.uploader.destroy( imageId);
-        console.log("d:---- ",destroy);
 
         const myCloud = await cloudinary.uploader.upload( req.body.avatar, {
             folder: "/Ecommerce-100-3/avatars",
@@ -238,7 +233,7 @@ exports.getAllUsers = catchAsyncErrors( async( req, res, next)=>{
     })
 })
 
-// Get single user --(admin)
+// Get single user( user Details) --(admin)
 exports.getSingleUser = catchAsyncErrors( async( req, res, next)=>{
 
     const user = await User.findById( req.params.id);
@@ -253,7 +248,7 @@ exports.getSingleUser = catchAsyncErrors( async( req, res, next)=>{
     })
 })
 
-// update User Role --(admin)
+// update User Role with name and email --(admin)
 exports.udpateUserRole = catchAsyncErrors( async( req, res, next)=>{
 
                                                                  // if any field is undefined , then this method not included the update object, and therefore not updated.( because it uses $set operator under the hood). 
@@ -262,8 +257,6 @@ exports.udpateUserRole = catchAsyncErrors( async( req, res, next)=>{
         email: req.body.email,
         role: req.body.role,
     }
-
-    console.log(userNewData);
 
     const user = await User.findByIdAndUpdate( req.params.id, userNewData, {
         new: true,
@@ -280,15 +273,16 @@ exports.udpateUserRole = catchAsyncErrors( async( req, res, next)=>{
 // Delete User --(admin)
 exports.deleteUser = catchAsyncErrors( async( req, res, next)=>{
 
-    const isUser = User.findById( req.params.id);
+    const isUser = await User.findById( req.params.id);
 
     if(!isUser){
-        return next( new ErrorHandler( 404, `User does not exist with Id: ${req.params.is}`));
+        return next( new ErrorHandler( 404, `User does not exist with Id: ${req.params.isUser}`));
     }
 
-    // i will remove cloudinary later
+   // delete avatar from cloudinary
+    const myCloud = await cloudinary.uploader.destroy( isUser.avatar.public_id);
 
-    const user = await User.findOneAndDelete( req.params.id);
+    const user = await User.findByIdAndDelete( req.params.id);
 
     res.status(200).json({
         success: true,

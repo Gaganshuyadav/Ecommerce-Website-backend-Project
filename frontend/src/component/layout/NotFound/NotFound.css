@@ -1,0 +1,36 @@
+.notfound{
+    width:100vw;
+    height:100vh;
+    text-align: center;
+    align-content: center;
+}
+
+.notfound > svg{
+    font-size: 7vmax;
+    color:tomato;
+}
+
+.notfound > p{
+    font-size: 3vmax;
+    color:rgb(119, 117, 117);
+}
+
+.notfound > a{
+    text-decoration: none;
+    color:white;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    background-color: rgb(90, 86, 86);
+    padding: 1vmax 3.4vmax;
+    font-weight:400;
+    font-size: 1.7vmax;
+    margin: 2vmax auto; 
+    display: block;
+    width:5vmax;
+}
+
+
+.notfound > a:hover{
+    transition:all 300ms;
+    background-color: rgb(32, 32, 32);
+    transform: scale(1.2 ,1.2);
+}

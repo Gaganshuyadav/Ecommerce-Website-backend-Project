@@ -28,7 +28,7 @@ export default function ProductDetails(){
     const dispatch = useDispatch();
     const alert = useAlert();
 
-    const [ quantity, setQuantity] = useState(1);
+    const [ quantity, setQuantity] = useState( product && product.Stock>0 ? 1 : 0);
 
     const addToCartHandler = ()=>{
         dispatch(addToCart( { productId: product._id, name: product.name, price: product.price, image: product.images[0].url, stock: product.Stock, quantity: quantity}));

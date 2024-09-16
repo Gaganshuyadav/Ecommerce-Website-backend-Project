@@ -7,7 +7,7 @@ export default function Product({ product }){
     const options ={
         edit:false,
         color: "rgba(20,20,20,0.1)",
-        size: window.innerWidth < 600 ? 19 : 26,
+        // size:  10,
         activeColor:"#faaf00",
         value: product.ratings,
         isHalf: true,

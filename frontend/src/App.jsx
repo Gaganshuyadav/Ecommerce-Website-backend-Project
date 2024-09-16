@@ -31,6 +31,12 @@ import NewProduct from "./component/Admin/NewProduct.jsx";
 import UpdateProduct from "./component/Admin/UpdateProduct.jsx";
 import OrderList from "./component/Admin/OrderList.jsx";
 import ProcessOrder from "./component/Admin/ProcessOrder.jsx";
+import UserList from "./component/Admin/UserList.jsx";
+import UpdateUser from "./component/Admin/UpdateUser.jsx";
+import ProductReviews from "./component/Admin/ProductReviews.jsx";
+import About from "./component/layout/About/About.jsx";
+import Contact from "./component/layout/Contact/Contact";
+import NotFound from "./component/layout/NotFound/NotFound.jsx";
 //payment
 import PaymentKey from "./component/Cart/PaymentKey.jsx";
 
@@ -55,6 +61,11 @@ function App() {
 
   },[]);
 
+
+  //eventlistener to prevent contextmenu open
+  // window.oncontextmenu = (e)=>{
+  //   e.preventDefault();
+  // }
   
   return (
     <>
@@ -86,12 +97,23 @@ function App() {
 
     {/* Admin Routes */}
       <Route path="/admin/dashboard" element={<Dashboard/>}/>
+
       <Route path="/admin/products" element={<ProductList/>} />
       <Route path="/admin/create/product" element={<NewProduct/>} />
       <Route path="/admin/product/:id" element={<UpdateProduct/>} />
+
       <Route path="/admin/orders" element={<OrderList/>} />
       <Route path="/admin/order/:id" element={<ProcessOrder/>} />
 
+      <Route path="/admin/users" element={<UserList/>} />
+      <Route path="/admin/user/:id" element={<UpdateUser/>}/>
+
+      <Route path="/admin/reviews" element={<ProductReviews/>} />
+
+      {/* layout */}
+      <Route path="/contact" element={<Contact/>} />
+      <Route path="/about" element={<About/>} />
+      <Route path="/*" element={<NotFound/>} />
       </Routes>
     <Footer/>
     </>

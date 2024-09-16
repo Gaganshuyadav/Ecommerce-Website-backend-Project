@@ -82,8 +82,10 @@ export const getAllOrders = createAsyncThunk("admin/getAllOrders", async( noPara
 //update order status by admin
 export const updateOrder = createAsyncThunk("admin/updateOrder", async( { id, formData }, { rejectWithValue})=>{
     const token = localStorage.getItem("token");
+    console.log("== ",id);
+    console.log("-- ",formData);
     try{
-        const { data} = await axios.put(`http://localhost:3000/api/v1/order/${id}`, formData, { headers:{ "Content-Type":"application/json", "Authorization":`Bearer ${token}`}});
+        const { data} = await axios.put(`http://localhost:3000/api/v1/admin/order/${id}`, formData, { headers:{ "Content-Type":"application/json", "Authorization":`Bearer ${token}`}});
         return data;
     }
     catch(error){

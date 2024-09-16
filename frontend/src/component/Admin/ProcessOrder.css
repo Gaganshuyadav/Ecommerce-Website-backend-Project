@@ -39,6 +39,57 @@
     color: #575757;
 }
 
+/*Payment*/
+
+.paymentArea{
+    margin-top: 1vmax;    
+}
+
+.paymentAreaBox{
+    margin-left: 3vmax;
+    margin-top: 1vmax;
+}
+.paymentAreaBox > div{
+    display:flex;
+    margin-bottom: 1vmax;
+}
+.paymentAreaBox > div > p{
+    font: 600 1.02vmax "Roboto";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(0, 0, 0);
+    letter-spacing: 1px;
+    text-shadow: 0px 0px 0px black;
+}
+.paymentAreaBox > div > span{
+    margin-left: 1vmax;
+    font: 400 1.1vmax "Roboto";
+    color: #575757;
+}
+
+/*Order Status*/
+
+.statusArea{
+    margin-top: 1vmax;    
+}
+
+.statusAreaBox{
+    margin-left: 3vmax;
+    margin-top: 1vmax;
+}
+.statusAreaBox > div{
+    display:flex;
+    margin-bottom: 1vmax;
+}
+
+.statusAreaBox > div > span{
+   font: 600 1.02vmax "Roboto";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(0, 0, 0);
+    letter-spacing: 1px;
+    text-shadow: 0px 0px 0px black;
+}
+
+
 /*ordered items*/
 .processOrderItems{
     margin-top: 2vmax;

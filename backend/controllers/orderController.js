@@ -84,18 +84,24 @@ exports.getAllOrders = catchAsyncErrors( async( req, res, next)=>{
 exports.updateOrder = catchAsyncErrors( async( req, res, next)=>{
 
     const order = await Order.findById( req.params.id);
+    console.log(req.body);
 
     if( order.orderStatus === "Delivered"){
         return next( new ErrorHandler( 400, "You have already delivered this order"))
     }
 
 
-    order.orderItems.forEach( async (item)=>{
+    if(req.body.status==="Shipped"){
+
+        order.orderItems.forEach( async (item)=>{
 
         const product = await Product.findById( item.productId._id);
         product.Stock = product.Stock - item.quantity;
         await product.save({ validateBeforeSave: false});
-    })
+    })  
+
+    }
+    
 
     order.orderStatus = req.body.status;
 

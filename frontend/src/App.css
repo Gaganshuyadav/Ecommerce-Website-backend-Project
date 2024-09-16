@@ -10,3 +10,8 @@ input::-webkit-outer-spin-button,
     -webkit-appearance: none;
     margin:0;
 }
+
+/*cursor design*/
+body{
+    /* cursor:url("./images/cursor.png"), auto; */
+}

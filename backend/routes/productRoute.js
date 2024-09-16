@@ -10,6 +10,7 @@ router.route("/products/:id").get( getSingleProduct);
 
 router.route("/review").put( isAuthenticatedUser, createProductReview);
 
+//use req.query 
 router.route("/reviews").get( getProductReviews).delete( isAuthenticatedUser, deleteReview);
 
 //admin

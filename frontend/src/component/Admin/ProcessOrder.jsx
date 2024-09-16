@@ -5,14 +5,17 @@ import MetaData from "../layout/MetaData.jsx";
 import Typography from "@mui/material/Typography";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getOrderDetails, clearError } from "../../features/Slices/OrderSlice.jsx";
+import { getOrderDetails, clearError, updateOrder, clearIsUpdated } from "../../features/Slices/OrderSlice.jsx";
+import Loader from "./../layout/Loader/Loader.jsx";
+import { useAlert} from "react-alert";
 
 export default function ConfirmOrder(){
 
     const dispatch = useDispatch();
     const params  = useParams();
-    const { order, loading, error} = useSelector( state=>state.order); 
-    const { category, setCategory} = useState("");
+    const { order, loading, error, isUpdated} = useSelector( state=>state.order); 
+    const [ status, setStatus] = useState("");
+    const alert = useAlert();
 
     useEffect(()=>{
 
@@ -24,14 +27,37 @@ export default function ConfirmOrder(){
                 clearError();
             },10000);
         }
-    },[ error]);
+
+        if(isUpdated){
+        dispatch( getOrderDetails( params.id));
+
+        setTimeout(()=>{
+            dispatch( clearIsUpdated());
+        },10000);
+        }
+
+    },[ error, isUpdated]);
+
+    const handleStatusBtn = ()=>{
+        const formData = new FormData();
+        formData.append("status",status);
+        dispatch(updateOrder({id:params.id, formData}));
+    };
 
     console.log(order);
+    console.log(status);
     return(
         <Fragment>
             <MetaData title="Process Order"/>
+        {
+            loading
+            ?
+            <Loader/>
+            :
+            (
            <div className="processOrderPage">
               <div className="box1">
+
                 <div className="processShippingArea">
                     <Typography fontSize={26}>Shipping Info</Typography>
                     <div className="processShippingAreaBox">
@@ -49,6 +75,28 @@ export default function ConfirmOrder(){
                         </div>
                     </div>
                 </div>
+
+                <div className="paymentArea">
+                    <Typography fontSize={26}>Payment</Typography>
+                    <div className="paymentAreaBox">
+                      <div>
+                        <p>Payment Status: </p>
+                        <span style={{color: order.paymentInfo && order.paymentInfo.status==="succeeded" ? "green" : "red"}}>{ order.paymentInfo && order.paymentInfo.status==="succeeded" ? "PAID" : "NOT PAID"}</span>
+                      </div>
+                      <div>
+                        <p>Amount: </p>
+                        <span>{ order && order.totalPrice}</span>
+                      </div>
+                    </div>
+                </div>
+
+                <div className="statusArea">
+                    <Typography fontSize={26}>Order Status</Typography>
+                    <div className="statusAreaBox">
+                        <span style={{color: order.orderStatus && order.orderStatus==="Processing" ? "red" : ( order.orderStatus==="Shipped" ? "blue" : "green") }}>{ order.orderStatus && order.orderStatus}</span>
+                    </div>
+                </div>
+
                 <div className="processOrderItems">
                     <Typography fontSize={26}>Order Items</Typography>
                     <div className="Container">
@@ -73,15 +121,21 @@ export default function ConfirmOrder(){
                 <div className="processSummery">
                 <Typography fontSize={26}>Process Order</Typography>
                 <div className="processOrder">
-                    <select value={ category} onClick={( e)=>{setCategory( e.target.value)}}>
-                        <option value="Shipped">Shipped</option>
-                        <option value="Delivered">Delivered</option>
+                    <select value={ status} onChange={(e)=>{ setStatus(e.target.value);console.log(e);console.log(e.target.value)}}>
+                       <option value="">Select Status</option>
+                       { order && order.orderStatus==="Processing" && (<option value="Shipped" >Shipped</option>) }
+                       { order && (order.orderStatus==="Processing" || order.orderStatus==="Shipped")  && (<option value="Delivered">Delivered</option>) }
                     </select>
                 </div>
-                <button onClick={()=>{dispatch(updateOrder(category))}}>Process</button>
+                <button onClick={ handleStatusBtn} style={{backgroundColor: status==="" ? "gray": "tomato" }} 
+                disabled={ status===""  ? true : false}>Process</button>
                 </div>
               </div>
            </div>
+        )
+    }
         </Fragment>
+        
+        
     )
 }

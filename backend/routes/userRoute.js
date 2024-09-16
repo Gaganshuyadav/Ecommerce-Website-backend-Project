@@ -18,7 +18,7 @@ router.route("/me").get( isAuthenticatedUser, getUserDetails);
 router.route("/password/update").put( isAuthenticatedUser, updatePassword);
 
 router.route("/me/update").put( isAuthenticatedUser, updateProfile);
-
+//--admin
 router.route("/admin/users").get( isAuthenticatedUser , authorizeRoles("admin"), getAllUsers);
 
 router.route("/admin/user/:id")

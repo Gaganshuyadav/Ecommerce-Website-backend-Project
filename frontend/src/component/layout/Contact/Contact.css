@@ -1,0 +1,19 @@
+.contact{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact > a {
+    color:black;
+    text-decoration: none;
+    border:1px solid green;
+    border-radius: 5px;
+}
+.contact > a > p{
+    font-size: 2vmax;
+    padding:1vmax 2vmax;
+    background-color: rgba(216, 213, 213, 0.664);   
+}

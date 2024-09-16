@@ -101,6 +101,7 @@ exports.getAllProducts = catchAsyncErrors( async ( req, res, next)=>{
 exports.getSingleProduct = catchAsyncErrors( async ( req, res, next)=>{
     
     const product = await Product.findById(req.params.id);
+    console
 
     if(!product){
         return next( new ErrorHandler( 500, "Product Not Found"))
@@ -283,14 +284,23 @@ exports.deleteReview = catchAsyncErrors ( async( req, res, next)=>{
 
     product.reviews = reviews;
 
-    let totalRating=0;
-    reviews.forEach((rev)=>{
-        totalRating += rev.rating ;
-    })
-    product.ratings = totalRating/(reviews.length);
+    //this condition is important otherwise the error occurs because (NaN = 0/0)[ratings is not a number validation failed]
+    if(reviews.length<1){
 
-    product.numOfReviews = reviews.length;
+        product.ratings = 0
+        product.numofReviews = 0
+    }
+    else{
+        let totalRating=0;
+        reviews.forEach((rev)=>{
+            totalRating += rev.rating ;
+        })
+        product.ratings = totalRating/(reviews.length);
 
+        product.numOfReviews = reviews.length;
+    }
+    
+    
     await product.save();
 
     res.status( 200).json({

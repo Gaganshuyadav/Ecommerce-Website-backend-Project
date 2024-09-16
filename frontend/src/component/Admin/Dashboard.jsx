@@ -9,6 +9,8 @@ import { useEffect} from "react";
 import { useSelector, useDispatch} from "react-redux";
 import { CategoryScale, Chart, LinearScale, LineElement, PointElement, ArcElement, Tooltip, Legend, plugins } from "chart.js";
 import { getAdminProduct} from "../../features/Slices/ProductSlice";
+import { getAllOrders } from "../../features/Slices/OrderSlice";
+import { getAllUsers} from "../../features/Slices/UserSlice";
 
 Chart.register( LineElement, CategoryScale, LinearScale, PointElement, ArcElement, Tooltip, Legend );
  
@@ -16,7 +18,21 @@ export default function Dashboard(){
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    const { error, loading, products} = useSelector( state=>state.products);
+    const { error, loading, products } = useSelector( state=>state.products);
+    const { orders } = useSelector( state=>state.order);
+    const { users } = useSelector( state=>state.user);
+
+    let outOfStock=0;
+    products && products.forEach(( product)=>{
+        if(product.Stock===0){
+            outOfStock += 1;
+        }
+    });
+
+    let totalAmount=0; 
+    orders && orders.forEach(( order)=>{
+        totalAmount += order.totalPrice; 
+    })
 
     const lineState ={
         labels: [ "Initial Amount","Amount Earned" ],
@@ -25,7 +41,7 @@ export default function Dashboard(){
             label:'total amount',
             backgroundColor:["red"],
             hoverBackgroundColor:["blue"],
-            data: [0,3400],
+            data: [ 0, totalAmount],
             borderColor:"rgb(75,192,192)",
             hover:"rgb(75,112,192)",
             fill:true,
@@ -37,7 +53,7 @@ export default function Dashboard(){
         labels:[ "Out of Stock", "InStock"],
         datasets: [{
             label: "My First Dataset",
-            data: [3,10],
+            data: [ outOfStock, products ? products.length-outOfStock : 0],
             backgroundColor: [
                 "red",
                 "blue",
@@ -48,6 +64,8 @@ export default function Dashboard(){
 
     useEffect(()=>{
         dispatch( getAdminProduct());
+        dispatch( getAllOrders());
+        dispatch( getAllUsers());
 
         if(error){
             alert.error(error);
@@ -65,7 +83,7 @@ export default function Dashboard(){
                     <Typography>Dashboards</Typography>
                     <div className="dsBox1">
                         <p>Total Amount</p>
-                        <p>&#8377;2000</p>
+                        <p>&#8377;{ totalAmount}</p>
                     </div>
                     <div className="dsBox2">
                         <div className="b1">
@@ -77,13 +95,13 @@ export default function Dashboard(){
                         <div className="b2">
                           <Link to="/admin/orders">
                             <p>Orders</p>
-                            <p>5</p>
+                            <p>{ orders && orders.length}</p>
                           </Link>
                         </div>
                         <div className="b3">
                           <Link to="/admin/users">
                             <p>Users</p>
-                            <p>4</p>
+                            <p>{ users && users.length}</p>
                           </Link>
                         </div>
                     </div>
