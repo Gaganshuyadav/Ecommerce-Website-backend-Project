@@ -20,7 +20,7 @@ export default function Home(){
         async function get(){
         dispatch( getProduct( { loading: true ,products: [], productCount: 0})); 
         try{
-            const { data} = await axios.get("http://localhost:3000/api/v1/products");
+            const { data} = await axios.get("http://192.168.43.33:3000/api/v1/products");
               dispatch( getProduct({ ...data, loading: false}));
         }
         catch(err){

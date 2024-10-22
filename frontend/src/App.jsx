@@ -45,7 +45,7 @@ function App() {
   const { isAuthenticated, user, error} = useSelector( state=>state.user);
   const dispatch = useDispatch();
   const alert = useAlert();
-
+  const isAdmin = user && user.role==="admin" ? true : false;
 
   useEffect(()=>{
 
@@ -96,19 +96,19 @@ function App() {
       <Route path="/" /> 
 
     {/* Admin Routes */}
-      <Route path="/admin/dashboard" element={<Dashboard/>}/>
+      <Route path="/admin/dashboard" element={ isAdmin ? <Dashboard/> : <Navigate to="/login" />}/>
 
-      <Route path="/admin/products" element={<ProductList/>} />
-      <Route path="/admin/create/product" element={<NewProduct/>} />
-      <Route path="/admin/product/:id" element={<UpdateProduct/>} />
+      <Route path="/admin/products" element={ isAdmin ? <ProductList/> : <Navigate to="/login" />} />
+      <Route path="/admin/create/product" element={ isAdmin ? <NewProduct/> : <Navigate to="/login" />} />
+      <Route path="/admin/product/:id" element={ isAdmin ? <UpdateProduct/> : <Navigate to="/login" />} />
 
-      <Route path="/admin/orders" element={<OrderList/>} />
-      <Route path="/admin/order/:id" element={<ProcessOrder/>} />
+      <Route path="/admin/orders" element={ isAdmin ? <OrderList/> : <Navigate to="/login" />} />
+      <Route path="/admin/order/:id" element={ isAdmin ? <ProcessOrder/> : <Navigate to="/login" />} />
 
-      <Route path="/admin/users" element={<UserList/>} />
-      <Route path="/admin/user/:id" element={<UpdateUser/>}/>
+      <Route path="/admin/users" element={ isAdmin ? <UserList/> : <Navigate to="/login" />} />
+      <Route path="/admin/user/:id" element={ isAdmin ? <UpdateUser/> : <Navigate to="/login" />}/>
 
-      <Route path="/admin/reviews" element={<ProductReviews/>} />
+      <Route path="/admin/reviews" element={ isAdmin ? <ProductReviews/> : <Navigate to="/login" />} />
 
       {/* layout */}
       <Route path="/contact" element={<Contact/>} />

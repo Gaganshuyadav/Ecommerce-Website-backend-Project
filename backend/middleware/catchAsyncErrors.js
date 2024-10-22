@@ -7,6 +7,7 @@ module.exports = (fn)=>{
 }
 
 
+//the middle function acts as a promise resolver:--
 
 // module.exports = (fn)=>{
 //     Promise.resolve( fn( req,res,next)).catch(next);
