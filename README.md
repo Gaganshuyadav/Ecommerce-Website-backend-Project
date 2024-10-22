@@ -1,4 +1,4 @@
-# eCommerce Project
+# E-commerce Project
 
 ## Project Overview
 
@@ -77,4 +77,4 @@ This is a full-stack eCommerce project built using Node.js, Express.js, MongoDB,
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Gaganshuyadav/Ecommerce-Website-backend-Project.git
-   cd ecommerce-project
+   cd Ecommerce-project
